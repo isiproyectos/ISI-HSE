@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Iniciar Sesión - Documentos</title>
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Bootstrap Icons -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #f8f9fa;
+    }
+    
+    .login-container {
+      max-width: 400px;
+      width: 100%;
+      padding: 2rem;
+    }
+    
+    .login-card {
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .login-logo {
+      max-width: 200px;
+      margin-bottom: 1rem;
+    }
+    
+    .form-floating {
+      margin-bottom: 1rem;
+    }
+    
+    .btn-login {
+      width: 100%;
+      padding: 0.75rem;
+      font-weight: 500;
+    }
+    
+    .login-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: #6c757d;
+    }
+  </style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="card login-card">
+      <div class="card-body p-4 p-md-5">
+        <div class="login-header">
+          <img src="../static/logoISI.jpg" alt="Logo" class="login-logo">
+          <h2 class="fw-bold mb-2">Acceso a Documentos</h2>
+          <p class="text-muted mb-4">Ingresa tus credenciales para acceder</p>
+        </div>
+        
+        <form id="loginForm">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="username" placeholder="Usuario" required>
+            <label for="username">Usuario</label>
+          </div>
+          
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+            <label for="password">Contraseña</label>
+          </div>
+          
+          <div class="alert alert-danger d-none" id="loginError">
+            Usuario o contraseña incorrectos
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-login mt-4">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
+          </button>
+          <a href="../index.html" class="btn btn-outline-secondary btn-login mt-2">
+            <i class="bi bi-house-door me-2"></i>Volver al Inicio
+          </a>
+        </form>
+        
+        <div class="login-footer">
+          <p>Sistema de Gestión de Documentos</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap Bundle with Popper -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Custom JavaScript -->
+  <script>
+    // Credenciales de acceso (puedes cambiarlas por las que desees)
+    const VALID_USERS = [
+      { username: "admin", password: "admin123" },
+      { username: "usuario", password: "123456" }
+    ];
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      const loginForm = document.getElementById('loginForm');
+      const loginError = document.getElementById('loginError');
+      
+      // Verificar si ya hay una sesión activa
+      const isLoggedIn = localStorage.getItem('docsLoggedIn');
+      if (isLoggedIn === 'true') {
+        // Redirigir a la página de documentos si ya está autenticado
+        window.location.href = './documentos.html';
+      }
+      
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        
+        // Verificar credenciales
+        const isValid = VALID_USERS.some(user => 
+          user.username === username && user.password === password
+        );
+        
+        if (isValid) {
+          // Guardar estado de sesión
+          localStorage.setItem('docsLoggedIn', 'true');
+          localStorage.setItem('docsUsername', username);
+          localStorage.setItem('docsLoginTime', new Date().getTime());
+          
+          // Redirigir a la página de documentos
+          window.location.href = './documentos.html';
+        } else {
+          // Mostrar error
+          loginError.classList.remove('d-none');
+          
+          // Ocultar mensaje de error después de 3 segundos
+          setTimeout(() => {
+            loginError.classList.add('d-none');
+          }, 3000);
+        }
+      });
+    });
+  </script>
+</body>
+</html>
