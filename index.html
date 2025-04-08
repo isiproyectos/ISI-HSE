@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página de Inicio</title>
+  <title>Iniciar Sesión</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
@@ -11,309 +11,86 @@
   <style>
     body {
       min-height: 100vh;
-      overflow-x: hidden;
-    }
-    
-    .sidebar {
-      width: 250px;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       background-color: #f8f9fa;
-      border-right: 1px solid #dee2e6;
     }
     
-    .content {
-      margin-left: 250px;
-      transition: all 0.3s;
+    .login-container {
+      max-width: 400px;
+      width: 100%;
+      padding: 2rem;
     }
     
-    /* Encabezado con imágenes más separadas */
-    .header {
-      height: 245px;
-      border-bottom: 1px solid #dee2e6;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      overflow: hidden;
+    .login-card {
+      border-radius: 1rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     }
     
-    /* Contenedor del logo alineado a la izquierda */
-    .logo-container {
-      width: 45%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      overflow: hidden;
-      margin-left: 0;
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
     }
     
-    /* Contenedor de usuario alineado a la derecha */
-    .user-container {
-      width: 45%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
+    .login-logo {
+      max-width: 200px;
+      margin-bottom: 1rem;
     }
     
-/* Imágenes más grandes sin recortes */
-.logo-img {
-  height: 250px;  /* Ajustamos la altura */
-  width: 300px;   /* Ajustamos el ancho */
-  object-fit: contain; /* Asegura que la imagen no se recorte */
-  transform: scale(1); /* Sin escalado adicional */
-  transform-origin: left center;
-}
-
-.user-img {
-  height: 250px;  /* Ajustamos la altura */
-  width: 255px;   /* Ajustamos el ancho */
-  object-fit: contain; /* Asegura que la imagen no se recorte */
-  transform: scale(1); /* Sin escalado adicional */
-  transform-origin: right center;
-}
-
-
-    
-    .nav-link {
-      display: flex;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      color: #212529;
-      text-decoration: none;
+    .form-floating {
+      margin-bottom: 1rem;
     }
     
-    .nav-link:hover, .nav-link.active {
-      background-color: #e9ecef;
-      color: #0d6efd;
+    .btn-login {
+      width: 100%;
+      padding: 0.75rem;
+      font-weight: 500;
     }
     
-    .nav-link i {
-      margin-right: 10px;
+    .login-footer {
+      text-align: center;
+      margin-top: 1.5rem;
+      font-size: 0.875rem;
+      color: #6c757d;
     }
-    
-    .sidebar-divider {
-      margin: 1rem 0;
-      border-top: 1px solid #dee2e6;
-    }
-    
-    /* Mobile styles */
-    @media (max-width: 768px) {
-      .sidebar {
-        margin-left: -250px;
-      }
-      
-      .sidebar.active {
-        margin-left: 0;
-      }
-      
-      .content {
-        margin-left: 0;
-      }
-      
-      .content.active {
-        margin-left: 250px;
-      }
-      
-      .overlay {
-        display: none;
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        transition: all 0.5s ease-in-out;
-      }
-      
-      .overlay.active {
-        display: block;
-        opacity: 1;
-      }
-      
-      .header {
-        height: 150px;
-      }
-      
-      .logo-container, .user-container {
-        height: 150px;
-      }
-      
-      .logo-img, .user-img {
-        height: 120px;
-        width: 120px;
-      }
-      
-      /* Ajuste para el botón de menú en móvil */
-      #sidebarToggle {
-        position: absolute;
-        left: 5px;
-        top: 5px;
-        z-index: 10;
-      }
-    }
-    /* Asegurar que todas las imágenes de las tarjetas tengan el mismo tamaño */
-.card-img-top {
-  height: 200px; /* Ajusta la altura que deseas */
-  width: 100%;   /* Hace que las imágenes ocupen todo el ancho del contenedor */
-  object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
-}
-
   </style>
-  
 </head>
 <body>
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
-    <div class="p-3 border-bottom">
-      <h3 class="fs-5 fw-semibold">Mi Aplicación</h3>
+  <div class="login-container">
+    <div class="card login-card">
+      <div class="card-body p-4 p-md-5">
+        <div class="login-header">
+          <img src="./static/logoISI.jpg" alt="Logo" class="login-logo">
+          <h2 class="fw-bold mb-2">Iniciar Sesión</h2>
+          <p class="text-muted mb-4">Ingresa tus credenciales para acceder</p>
+        </div>
+        
+        <form id="loginForm">
+          <div class="form-floating">
+            <input type="text" class="form-control" id="username" placeholder="Usuario" required>
+            <label for="username">Usuario</label>
+          </div>
+          
+          <div class="form-floating">
+            <input type="password" class="form-control" id="password" placeholder="Contraseña" required>
+            <label for="password">Contraseña</label>
+          </div>
+          
+          <div class="alert alert-danger d-none" id="loginError">
+            Usuario o contraseña incorrectos
+          </div>
+          
+          <button type="submit" class="btn btn-primary btn-login mt-4">
+            <i class="bi bi-box-arrow-in-right me-2"></i>Ingresar
+          </button>
+        </form>
+        
+        <div class="login-footer">
+          <p>Sistema de Gestión de Documentos</p>
+        </div>
+      </div>
     </div>
-    
-    <div class="p-2">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a href="#" class="nav-link active">
-            <i class="bi bi-house-door"></i> Inicio
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="bi bi-grid"></i> Dashboard
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="bi bi-people"></i> Usuarios
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./templates/documentos.html" class="nav-link">
-            <i class="bi bi-file-text"></i> Documentos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./templates/calendario.html"  class="nav-link">
-            <i class="bi bi-calendar"></i> Calendario
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="./templates/estadísticas.html" class="nav-link">
-            <i class="bi bi-bar-chart"></i> Estadísticas
-          </a>
-        </li>
-      </ul>
-      
-      <div class="sidebar-divider"></div>
-      
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a href="#" class="nav-link">
-            <i class="bi bi-question-circle"></i> ¿Quienes Somos?
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Overlay for mobile -->
-  <div id="overlay" class="overlay"></div>
-
-  <!-- Page content -->
-  <div id="content" class="content">
-    <!-- Header with images -->
-    <header class="header">
-      <!-- Logo container -->
-      <div class="logo-container">
-        <!-- Mobile sidebar toggle -->
-        <button id="sidebarToggle" class="btn btn-outline-secondary me-2 d-md-none">
-          <i class="bi bi-list"></i>
-        </button>
-        
-        <!-- Top-left image -->
-        <img src="./static/logoISI.jpg" alt="Logo" class="logo-img">
-      </div>
-      
-      <!-- User image container -->
-      <div class="user-container">
-        <!-- Top-right image -->
-        <img src="./static/proyectos logo2.png" alt="Usuario" class="user-img">
-      </div>
-    </header>
-    
-    <!-- Main content -->
-    <main class="p-4">
-      <h1 class="mb-4">Página de inicio</h1>
-      <p class="text-muted mb-4">
-        Bienvenido a tu nueva aplicación. Esta es una página de inicio con una barra lateral a la izquierda y dos imágenes en las esquinas superiores.
-      </p>
-      
-      <div class="row g-4">
-        <!-- Content cards -->
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card">
-            <img src="./static/equipo-de-seguridad-scaled.webp" class="card-img-top" alt="Contenido 1">
-            <div class="card-body">
-              <h5 class="card-title">Título del contenido 1</h5>
-              <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card">
-            <img src="./static/equipo-de-proteccion-personal-1-1140x641.jpg" class="card-img-top" alt="Contenido 2">
-            <div class="card-body">
-              <h5 class="card-title">Título del contenido 2</h5>
-              <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card">
-            <img src="./static/prueba.webp" class="card-img-top" alt="Contenido 3">
-            <div class="card-body">
-              <h5 class="card-title">Título del contenido 3</h5>
-              <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card">
-            <img src="./static/workers_hardhats_construction_masks_men_shutterstock_1685136613.jpg" class="card-img-top" alt="Contenido 4">
-            <div class="card-body">
-              <h5 class="card-title">Título del contenido 4</h5>
-              <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card">
-            <img src="./static/prueba2.jpg" class="card-img-top" alt="Contenido 5">
-            <div class="card-body">
-              <h5 class="card-title">Título del contenido 5</h5>
-              <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
-            </div>
-          </div>
-        </div>
-        
-        <div class="col-12 col-md-6 col-lg-4">
-          <div class="card">
-            <img src="./static/prueba3.webp" class="card-img-top" alt="Contenido 6">
-            <div class="card-body">
-              <h5 class="card-title">Título del contenido 6</h5>
-              <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
-            </div>
-          </div>
-        </div>
-      </div>
-    </main>
   </div>
 
   <!-- Bootstrap Bundle with Popper -->
@@ -321,32 +98,50 @@
   
   <!-- Custom JavaScript -->
   <script>
+    // Credenciales de acceso (puedes cambiarlas por las que desees)
+    const VALID_USERS = [
+      { username: "admin", password: "admin123" },
+      { username: "usuario", password: "123456" }
+    ];
+    
     document.addEventListener('DOMContentLoaded', function() {
-      const sidebar = document.getElementById('sidebar');
-      const content = document.getElementById('content');
-      const overlay = document.getElementById('overlay');
-      const sidebarToggle = document.getElementById('sidebarToggle');
+      const loginForm = document.getElementById('loginForm');
+      const loginError = document.getElementById('loginError');
       
-      // Toggle sidebar on mobile
-      sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
-        content.classList.toggle('active');
-        overlay.classList.toggle('active');
-      });
+      // Verificar si ya hay una sesión activa
+      const isLoggedIn = localStorage.getItem('isLoggedIn');
+      if (isLoggedIn === 'true') {
+        // Redirigir a la página principal si ya está autenticado
+        window.location.href = './home.html';
+      }
       
-      // Close sidebar when clicking on overlay
-      overlay.addEventListener('click', function() {
-        sidebar.classList.remove('active');
-        content.classList.remove('active');
-        overlay.classList.remove('active');
-      });
-      
-      // Close sidebar on window resize if screen becomes larger
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-          sidebar.classList.remove('active');
-          content.classList.remove('active');
-          overlay.classList.remove('active');
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const username = document.getElementById('username').value.trim();
+        const password = document.getElementById('password').value.trim();
+        
+        // Verificar credenciales
+        const isValid = VALID_USERS.some(user => 
+          user.username === username && user.password === password
+        );
+        
+        if (isValid) {
+          // Guardar estado de sesión
+          localStorage.setItem('isLoggedIn', 'true');
+          localStorage.setItem('username', username);
+          localStorage.setItem('loginTime', new Date().getTime());
+          
+          // Redirigir a la página principal
+          window.location.href = './home.html';
+        } else {
+          // Mostrar error
+          loginError.classList.remove('d-none');
+          
+          // Ocultar mensaje de error después de 3 segundos
+          setTimeout(() => {
+            loginError.classList.add('d-none');
+          }, 3000);
         }
       });
     });
