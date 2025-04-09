@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página de Documentos</title>
+  <title>Página de Estadísticas</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <!-- Bootstrap Icons -->
@@ -155,75 +155,129 @@
       }
     }
     
-    /* Asegurar que todas las imágenes de las tarjetas tengan el mismo tamaño */
-    .card-img-top {
-      height: 200px; /* Ajusta la altura que deseas */
-      width: 100%;   /* Hace que las imágenes ocupen todo el ancho del contenedor */
-      object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
-    }
-    
-    /* Estilos para el gestor de documentos */
-    .document-card {
-      transition: all 0.2s ease;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .document-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    .document-actions {
-      margin-top: auto;
-    }
-    
-    .document-manager {
-      background-color: #fff;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-    }
-    
-    .document-list {
-      background-color: #fff;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-    }
-    
-    .main-content {
-      padding: 2rem;
-    }
-    
-    /* Estilos para el panel de administración */
-    .admin-panel {
-      background-color: #f8f9fa;
-      border: 2px dashed #dc3545;
-      padding: 15px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-    }
-     
-    .admin-badge {
-      background-color: #dc3545;
-      color: white;
-      padding: 3px 8px;
+    /* Estilos para estadísticas */
+    .stats-card {
       border-radius: 10px;
-      font-size: 12px;
-      margin-left: 10px;
+      box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+      height: 100%;
     }
-     
-    .code-output {
-      width: 100%;
-      height: 200px;
-      font-family: monospace;
-      padding: 10px;
+    
+    .stats-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+    
+    .counter-container {
+      text-align: center;
+      padding: 20px;
+      border-radius: 10px;
+      margin-bottom: 20px;
+    }
+    
+    .counter {
+      font-size: 3.5rem;
+      font-weight: 700;
+      margin: 10px 0;
+      color: #198754;
+    }
+    
+    .counter-label {
+      font-size: 1.2rem;
+      color: #6c757d;
+      margin-bottom: 15px;
+    }
+    
+    .counter-subtitle {
+      font-size: 0.9rem;
+      color: #6c757d;
+    }
+    
+    .stats-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    
+    .department-admin {
+      background-color: rgba(13, 110, 253, 0.1);
+      border-left: 5px solid #0d6efd;
+    }
+    
+    .department-projects {
+      background-color: rgba(25, 135, 84, 0.1);
+      border-left: 5px solid #198754;
+    }
+    
+    .department-services {
+      background-color: rgba(220, 53, 69, 0.1);
+      border-left: 5px solid #dc3545;
+    }
+    
+    .department-admin .counter {
+      color: #0d6efd;
+    }
+    
+    .department-projects .counter {
+      color: #198754;
+    }
+    
+    .department-services .counter {
+      color: #dc3545;
+    }
+    
+    .record-days {
+      font-size: 1.1rem;
+      font-weight: 600;
       margin-top: 10px;
-      white-space: pre;
-      overflow: auto;
+    }
+    
+    .accident-date {
+      font-size: 0.9rem;
+      color: #6c757d;
+      margin-top: 5px;
+    }
+    
+    .stats-summary {
+      background-color: #f8f9fa;
+      border-radius: 10px;
+      padding: 20px;
+      margin-bottom: 30px;
+    }
+    
+    .summary-title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 15px;
+      color: #212529;
+    }
+    
+    .summary-item {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      padding-bottom: 10px;
+      border-bottom: 1px solid #dee2e6;
+    }
+    
+    .summary-label {
+      font-weight: 500;
+    }
+    
+    .summary-value {
+      font-weight: 600;
+    }
+    
+    .reset-button {
+      margin-top: 15px;
+    }
+    
+    .last-updated {
+      text-align: right;
+      font-size: 0.8rem;
+      color: #6c757d;
+      margin-top: 10px;
     }
   </style>
 </head>
@@ -231,7 +285,7 @@
   <!-- Sidebar -->
   <nav id="sidebar" class="sidebar">
     <div class="p-3 border-bottom">
-      <h3 class="fs-5 fw-semibold">Mi Aplicación</h3>
+      <h3 class="fs-5 fw-semibold">HSE Proyectos</h3>
     </div>
     
     <div class="p-2">
@@ -242,12 +296,12 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="../templates/dash.html" class="nav-link">
             <i class="bi bi-grid"></i> Dashboard
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="../templates/usuarios.html" class="nav-link">
             <i class="bi bi-people"></i> Usuarios
           </a>
         </li>
@@ -272,7 +326,7 @@
       
       <ul class="nav flex-column">
         <li class="nav-item">
-          <a href="#" class="nav-link">
+          <a href="../templates/nosotros.html" class="nav-link">
             <i class="bi bi-question-circle"></i> ¿Quienes Somos?
           </a>
         </li>
@@ -306,39 +360,120 @@
     </header>
 
     <!-- Main content -->
-    <div class="main-content">
-      <h1 class="mb-4">Estadisticas Contra Accidentes</h1>
+    <div class="main-content p-4">
+      <div class="stats-header">
+        <h1 class="mb-0">Estadísticas de Seguridad</h1>
+        <div>
+          <button id="exportData" class="btn btn-outline-primary">
+            <i class="bi bi-download me-2"></i>Exportar Datos
+          </button>
+        </div>
+      </div>
       
+      <div class="stats-summary mb-4">
+        <div class="summary-title">Resumen General</div>
+        <div class="row">
+          <div class="col-md-4">
+            <div class="summary-item">
+              <span class="summary-label">Total días sin accidentes:</span>
+              <span id="totalDaysSafe" class="summary-value">0</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="summary-item">
+              <span class="summary-label">Récord de días sin accidentes:</span>
+              <span id="recordDaysSafe" class="summary-value">0</span>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="summary-item">
+              <span class="summary-label">Último accidente:</span>
+              <span id="lastAccidentDate" class="summary-value">Ninguno registrado</span>
+            </div>
+          </div>
+        </div>
+        <div class="last-updated">
+          Última actualización: <span id="lastUpdatedDate">-</span>
+        </div>
+      </div>
+      
+      <!-- Counters Section -->
+      <div class="row mb-4">
+        <div class="col-md-4 mb-4">
+          <div class="stats-card department-admin">
+            <div class="counter-container">
+              <h3>Administración</h3>
+              <div id="adminCounter" class="counter">0</div>
+              <div class="counter-label">Días sin accidentes</div>
+              <div id="adminRecord" class="record-days">Récord: 0 días</div>
+              <div id="adminLastAccident" class="accident-date">Último accidente: Ninguno</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="stats-card department-projects">
+            <div class="counter-container">
+              <h3>Proyectos</h3>
+              <div id="projectsCounter" class="counter">0</div>
+              <div class="counter-label">Días sin accidentes</div>
+              <div id="projectsRecord" class="record-days">Récord: 0 días</div>
+              <div id="projectsLastAccident" class="accident-date">Último accidente: Ninguno</div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="col-md-4 mb-4">
+          <div class="stats-card department-services">
+            <div class="counter-container">
+              <h3>Servicios</h3>
+              <div id="servicesCounter" class="counter">0</div>
+              <div class="counter-label">Días sin accidentes</div>
+              <div id="servicesRecord" class="record-days">Récord: 0 días</div>
+              <div id="servicesLastAccident" class="accident-date">Último accidente: Ninguno</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Información adicional -->
+      <div class="card mt-4">
+        <div class="card-header">
+          <h5 class="mb-0">Información de Seguridad</h5>
+        </div>
+        <div class="card-body">
+          <p>Este panel muestra los días transcurridos desde el último accidente registrado en cada departamento. Los contadores se actualizan automáticamente cada día.</p>
+          <p>Para registrar un nuevo accidente, por favor contacte al departamento de Seguridad y Salud Ocupacional.</p>
+          <p><strong>Recuerde:</strong> La seguridad es responsabilidad de todos. Reporte cualquier condición insegura inmediatamente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
 
-
-
-
-        <!-- Bootstrap Bundle with Popper -->
+  <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
   <!-- Custom JavaScript -->
   <script>
     document.addEventListener('DOMContentLoaded', function() {
+      // Sidebar functionality
       const sidebar = document.getElementById('sidebar');
       const content = document.getElementById('content');
       const overlay = document.getElementById('overlay');
       const sidebarToggle = document.getElementById('sidebarToggle');
       
-      // Toggle sidebar on mobile
       sidebarToggle.addEventListener('click', function() {
         sidebar.classList.toggle('active');
         content.classList.toggle('active');
         overlay.classList.toggle('active');
       });
       
-      // Close sidebar when clicking on overlay
       overlay.addEventListener('click', function() {
         sidebar.classList.remove('active');
         content.classList.remove('active');
         overlay.classList.remove('active');
       });
       
-      // Close sidebar on window resize if screen becomes larger
       window.addEventListener('resize', function() {
         if (window.innerWidth > 768) {
           sidebar.classList.remove('active');
@@ -346,6 +481,179 @@
           overlay.classList.remove('active');
         }
       });
+      
+      // ===== CONFIGURACIÓN DE FECHAS =====
+      // Actualiza estas fechas cuando ocurra un accidente
+      const lastAccidentDates = {
+  admin: '2024-08-18',     // 235 días
+  projects: '2024-12-14',  // 117 días
+  services: '2024-12-06'   // 125 días
+};
+
+      
+      // Récords históricos (días máximos sin accidentes)
+      const historicalRecords = {
+        admin: 235,     // Récord histórico de Administración
+        projects: 117,  // Récord histórico de Proyectos
+        services: 125    // Récord histórico de Servicios
+      };
+      
+      // Función para calcular días transcurridos desde una fecha
+      function calculateDaysSince(dateString) {
+        const lastDate = new Date(dateString);
+        const today = new Date();
+        
+        // Resetear las horas para obtener días completos
+        lastDate.setHours(0, 0, 0, 0);
+        today.setHours(0, 0, 0, 0);
+        
+        const timeDiff = today - lastDate;
+        return Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+      }
+      
+      // Formatear fecha (dd/mm/yyyy)
+      function formatDate(date) {
+        return date.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric'
+        });
+      }
+      
+      // Formatear fecha y hora
+      function formatDateTime(date) {
+        return date.toLocaleDateString('es-ES', {
+          day: '2-digit',
+          month: '2-digit',
+          year: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+      }
+      
+      // Actualizar los contadores
+      function updateCounters() {
+        const departments = ['admin', 'projects', 'services'];
+        const today = new Date();
+        
+        // Actualizar fecha de última actualización
+        document.getElementById('lastUpdatedDate').textContent = formatDateTime(today);
+        
+        // Para cada departamento
+        departments.forEach(dept => {
+          const daysSince = calculateDaysSince(lastAccidentDates[dept]);
+          
+          // Actualizar contador
+          document.getElementById(`${dept}Counter`).textContent = daysSince;
+          
+          // Actualizar récord
+          document.getElementById(`${dept}Record`).textContent = `Récord: ${historicalRecords[dept]} días`;
+          
+          // Actualizar fecha del último accidente
+          document.getElementById(`${dept}LastAccident`).textContent = 
+            `Último accidente: ${formatDate(new Date(lastAccidentDates[dept]))}`;
+        });
+        
+        // Actualizar resumen
+        updateSummary();
+      }
+      
+      // Actualizar resumen
+      function updateSummary() {
+        const departments = ['admin', 'projects', 'services'];
+        
+        // Encontrar el departamento con más días sin accidentes
+        let maxDays = 0;
+        
+        departments.forEach(dept => {
+          const days = calculateDaysSince(lastAccidentDates[dept]);
+          if (days > maxDays) {
+            maxDays = days;
+          }
+        });
+        
+        // Actualizar total de días sin accidentes
+        document.getElementById('totalDaysSafe').textContent = maxDays;
+        
+        // Encontrar el récord máximo
+        let maxRecord = 0;
+        departments.forEach(dept => {
+          if (historicalRecords[dept] > maxRecord) {
+            maxRecord = historicalRecords[dept];
+          }
+        });
+        document.getElementById('recordDaysSafe').textContent = maxRecord;
+        
+        // Encontrar la fecha del accidente más reciente
+        let mostRecentDate = new Date('2000-01-01');
+        let mostRecentDept = '';
+        
+        departments.forEach(dept => {
+          const accidentDate = new Date(lastAccidentDates[dept]);
+          if (accidentDate > mostRecentDate) {
+            mostRecentDate = accidentDate;
+            mostRecentDept = dept;
+          }
+        });
+        
+        document.getElementById('lastAccidentDate').textContent = formatDate(mostRecentDate);
+      }
+      
+      // Exportar datos a CSV
+      document.getElementById('exportData').addEventListener('click', function() {
+        const departments = ['admin', 'projects', 'services'];
+        const departmentNames = {
+          admin: 'Administración',
+          projects: 'Proyectos',
+          services: 'Servicios'
+        };
+        
+        // Preparar contenido CSV
+        let csvContent = "data:text/csv;charset=utf-8,";
+        
+        // Agregar encabezado
+        csvContent += "Departamento,Días sin accidentes,Récord,Último accidente\n";
+        
+        // Agregar datos para cada departamento
+        departments.forEach(dept => {
+          const daysSince = calculateDaysSince(lastAccidentDates[dept]);
+          const lastAccident = formatDate(new Date(lastAccidentDates[dept]));
+          csvContent += `${departmentNames[dept]},${daysSince},${historicalRecords[dept]},${lastAccident}\n`;
+        });
+        
+        // Crear enlace de descarga
+        const encodedUri = encodeURI(csvContent);
+        const link = document.createElement("a");
+        link.setAttribute("href", encodedUri);
+        link.setAttribute("download", `estadisticas_seguridad_${new Date().toISOString().split('T')[0]}.csv`);
+        document.body.appendChild(link);
+        
+        // Iniciar descarga
+        link.click();
+        
+        // Limpiar
+        document.body.removeChild(link);
+      });
+      
+      // Programar actualización diaria a medianoche
+      function scheduleNextUpdate() {
+        const now = new Date();
+        const tomorrow = new Date(now);
+        tomorrow.setDate(tomorrow.getDate() + 1);
+        tomorrow.setHours(0, 0, 0, 0);
+        
+        const timeUntilMidnight = tomorrow - now;
+        setTimeout(() => {
+          updateCounters();
+          scheduleNextUpdate();
+        }, timeUntilMidnight);
+      }
+      
+      // Inicializar contadores
+      updateCounters();
+      
+      // Programar próxima actualización
+      scheduleNextUpdate();
     });
   </script>
 </body>

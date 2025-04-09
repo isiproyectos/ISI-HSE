@@ -170,7 +170,7 @@ object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
 <!-- Sidebar -->
 <nav id="sidebar" class="sidebar">
   <div class="p-3 border-bottom">
-    <h3 class="fs-5 fw-semibold">Mi Aplicación</h3>
+    <h3 class="fs-5 fw-semibold">HSE Proyectos</h3>
   </div>
   
   <div class="p-2">
@@ -181,12 +181,12 @@ object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="./templates/dash.html" class="nav-link">
           <i class="bi bi-grid"></i> Dashboard
         </a>
       </li>
       <li class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="./templates/usuarios.html" class="nav-link">
           <i class="bi bi-people"></i> Usuarios
         </a>
       </li>
@@ -211,7 +211,7 @@ object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
     
     <ul class="nav flex-column">
       <li class="nav-item">
-        <a href="#" class="nav-link">
+        <a href="./templates/nosotros.html" class="nav-link">
           <i class="bi bi-question-circle"></i> ¿Quienes Somos?
         </a>
       </li>
@@ -246,69 +246,111 @@ object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
   
   <!-- Main content -->
   <main class="p-4">
-    <h1 class="mb-4">Página de inicio</h1>
-    <p class="text-muted mb-4">
-      Bienvenido a tu nueva aplicación. Esta es una página de inicio con una barra lateral a la izquierda y dos imágenes en las esquinas superiores.
-    </p>
+    <h1 class="mb-4">Prevencion y Seguridad</h1>
+    <h4 class="text-dark mb-4">
+      En este apartado se le informa sobre la impotancia de la seguridad y la prevencion de accidentes dentro del area laboral o externa.
+    </h4>
     
     <div class="row g-4">
       <!-- Content cards -->
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <img src="./static/equipo-de-seguridad-scaled.webp" class="card-img-top" alt="Contenido 1">
+        <div class="card h-100">
+          <img src="./static/equipo-de-seguridad-scaled.webp" class="card-img-top" alt="Equipo de Seguridad">
           <div class="card-body">
-            <h5 class="card-title">Título del contenido 1</h5>
-            <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
+            <h5 class="card-title">Equipos de Protección Personal</h5>
+            <p class="card-text">Los EPP son fundamentales para proteger a los trabajadores de riesgos específicos en el entorno laboral. Incluyen cascos, gafas, guantes, calzado de seguridad y más.</p>
+            <div class="safety-tip">
+              <strong><i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Consejo de seguridad:</strong> 
+              <p class="mb-0">Inspecciona tu EPP antes de cada uso. El equipo dañado o desgastado no proporciona la protección adecuada y debe ser reemplazado inmediatamente.</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Normativa aplicable: NOM-017-STPS-2008</small>
           </div>
         </div>
       </div>
       
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <img src="./static/equipo-de-proteccion-personal-1-1140x641.jpg" class="card-img-top" alt="Contenido 2">
+        <div class="card h-100">
+          <img src="./static/equipo-de-proteccion-personal-1-1140x641.jpg" class="card-img-top" alt="Protección Personal">
           <div class="card-body">
-            <h5 class="card-title">Título del contenido 2</h5>
-            <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
+            <h5 class="card-title">Selección Adecuada de EPP</h5>
+            <p class="card-text">Cada trabajo requiere protección específica. Es crucial seleccionar el EPP adecuado según los riesgos identificados en el análisis de seguridad del trabajo.</p>
+            <div class="safety-tip">
+              <strong><i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Consejo de seguridad:</strong> 
+              <p class="mb-0">El EPP debe ser de la talla correcta y ajustarse adecuadamente. Un equipo mal ajustado puede ser tan peligroso como no usar protección.</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Capacitación requerida: Uso y mantenimiento de EPP</small>
           </div>
         </div>
       </div>
       
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <img src="./static/prueba.webp" class="card-img-top" alt="Contenido 3">
+        <div class="card h-100">
+          <img src="./static/prueba.webp" class="card-img-top" alt="Prevención de Riesgos">
           <div class="card-body">
-            <h5 class="card-title">Título del contenido 3</h5>
-            <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
+            <h5 class="card-title">Prevención de Estrés Térmico</h5>
+            <p class="card-text">El estrés térmico por calor es un riesgo grave en ambientes industriales. Puede causar deshidratación, calambres, agotamiento y golpe de calor.</p>
+            <div class="safety-tip">
+              <strong><i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Consejo de seguridad:</strong> 
+              <p class="mb-0">Programa descansos frecuentes en áreas frescas, bebe agua regularmente (incluso sin sed) y usa ropa ligera y transpirable cuando trabajes en ambientes calurosos.</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Normativa aplicable: NOM-015-STPS-2001</small>
           </div>
         </div>
       </div>
       
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <img src="./static/workers_hardhats_construction_masks_men_shutterstock_1685136613.jpg" class="card-img-top" alt="Contenido 4">
+        <div class="card h-100">
+          <img src="./static/workers_hardhats_construction_masks_men_shutterstock_1685136613.jpg" class="card-img-top" alt="Protección Respiratoria">
           <div class="card-body">
-            <h5 class="card-title">Título del contenido 4</h5>
-            <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
+            <h5 class="card-title">Protección Respiratoria</h5>
+            <p class="card-text">En ambientes con partículas, gases o vapores peligrosos, la protección respiratoria adecuada es esencial para prevenir enfermedades pulmonares y otros problemas de salud.</p>
+            <div class="safety-tip">
+              <strong><i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Consejo de seguridad:</strong> 
+              <p class="mb-0">Asegúrate de que tu mascarilla o respirador selle correctamente contra tu rostro. La presencia de vello facial puede comprometer el sellado y reducir la protección.</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Requiere evaluación médica previa al uso</small>
           </div>
         </div>
       </div>
       
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <img src="./static/prueba2.jpg" class="card-img-top" alt="Contenido 5">
+        <div class="card h-100">
+          <img src="./static/prueba2.jpg" class="card-img-top" alt="Seguridad en Naves Industriales">
           <div class="card-body">
-            <h5 class="card-title">Título del contenido 5</h5>
-            <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
+            <h5 class="card-title">Seguridad en Naves Industriales</h5>
+            <p class="card-text">Las naves industriales presentan múltiples riesgos como caídas, golpes, atrapamientos y exposición a sustancias peligrosas que requieren medidas específicas de prevención.</p>
+            <div class="safety-tip">
+              <strong><i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Consejo de seguridad:</strong> 
+              <p class="mb-0">Mantén las vías de evacuación y salidas de emergencia siempre despejadas. En caso de emergencia, cada segundo cuenta para una evacuación segura.</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Requiere plan de emergencia actualizado</small>
           </div>
         </div>
       </div>
       
       <div class="col-12 col-md-6 col-lg-4">
-        <div class="card">
-          <img src="./static/prueba3.webp" class="card-img-top" alt="Contenido 6">
+        <div class="card h-100">
+          <img src="./static/prueba3.webp" class="card-img-top" alt="Trabajo en Altura">
           <div class="card-body">
-            <h5 class="card-title">Título del contenido 6</h5>
-            <p class="card-text">Descripción breve del contenido que se muestra en esta tarjeta.</p>
+            <h5 class="card-title">Trabajo en Altura</h5>
+            <p class="card-text">Los trabajos en altura son una de las principales causas de accidentes graves y mortales en la industria. El uso de sistemas anticaídas es obligatorio.</p>
+            <div class="safety-tip">
+              <strong><i class="bi bi-exclamation-triangle-fill text-danger me-2"></i>Consejo de seguridad:</strong> 
+              <p class="mb-0">Inspecciona siempre tu arnés y línea de vida antes de cada uso. Verifica que no haya desgaste, cortes o daños en las costuras y componentes metálicos.</p>
+            </div>
+          </div>
+          <div class="card-footer">
+            <small class="text-muted">Normativa aplicable: NOM-009-STPS-2011</small>
           </div>
         </div>
       </div>
@@ -353,3 +395,4 @@ object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
 </script>
 </body>
 </html>
+  
