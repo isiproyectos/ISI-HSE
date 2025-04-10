@@ -227,12 +227,6 @@
       color: #dc3545;
     }
     
-    .record-days {
-      font-size: 1.1rem;
-      font-weight: 600;
-      margin-top: 10px;
-    }
-    
     .accident-date {
       font-size: 0.9rem;
       color: #6c757d;
@@ -373,19 +367,13 @@
       <div class="stats-summary mb-4">
         <div class="summary-title">Resumen General</div>
         <div class="row">
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="summary-item">
               <span class="summary-label">Total días sin accidentes:</span>
               <span id="totalDaysSafe" class="summary-value">0</span>
             </div>
           </div>
-          <div class="col-md-4">
-            <div class="summary-item">
-              <span class="summary-label">Récord de días sin accidentes:</span>
-              <span id="recordDaysSafe" class="summary-value">0</span>
-            </div>
-          </div>
-          <div class="col-md-4">
+          <div class="col-md-6">
             <div class="summary-item">
               <span class="summary-label">Último accidente:</span>
               <span id="lastAccidentDate" class="summary-value">Ninguno registrado</span>
@@ -405,7 +393,6 @@
               <h3>Administración</h3>
               <div id="adminCounter" class="counter">0</div>
               <div class="counter-label">Días sin accidentes</div>
-              <div id="adminRecord" class="record-days">Récord: 0 días</div>
               <div id="adminLastAccident" class="accident-date">Último accidente: Ninguno</div>
             </div>
           </div>
@@ -417,7 +404,6 @@
               <h3>Proyectos</h3>
               <div id="projectsCounter" class="counter">0</div>
               <div class="counter-label">Días sin accidentes</div>
-              <div id="projectsRecord" class="record-days">Récord: 0 días</div>
               <div id="projectsLastAccident" class="accident-date">Último accidente: Ninguno</div>
             </div>
           </div>
@@ -429,7 +415,6 @@
               <h3>Servicios</h3>
               <div id="servicesCounter" class="counter">0</div>
               <div class="counter-label">Días sin accidentes</div>
-              <div id="servicesRecord" class="record-days">Récord: 0 días</div>
               <div id="servicesLastAccident" class="accident-date">Último accidente: Ninguno</div>
             </div>
           </div>
@@ -485,17 +470,9 @@
       // ===== CONFIGURACIÓN DE FECHAS =====
       // Actualiza estas fechas cuando ocurra un accidente
       const lastAccidentDates = {
-  admin: '2024-08-18',     // 235 días
-  projects: '2024-12-14',  // 117 días
-  services: '2024-12-06'   // 125 días
-};
-
-      
-      // Récords históricos (días máximos sin accidentes)
-      const historicalRecords = {
-        admin: 235,     // Récord histórico de Administración
-        projects: 117,  // Récord histórico de Proyectos
-        services: 125    // Récord histórico de Servicios
+        admin: '2024-08-18',     // Fecha del último accidente en Administración
+        projects: '2024-12-14',  // Fecha del último accidente en Proyectos
+        services: '2024-12-06'   // Fecha del último accidente en Servicios
       };
       
       // Función para calcular días transcurridos desde una fecha
@@ -546,9 +523,6 @@
           // Actualizar contador
           document.getElementById(`${dept}Counter`).textContent = daysSince;
           
-          // Actualizar récord
-          document.getElementById(`${dept}Record`).textContent = `Récord: ${historicalRecords[dept]} días`;
-          
           // Actualizar fecha del último accidente
           document.getElementById(`${dept}LastAccident`).textContent = 
             `Último accidente: ${formatDate(new Date(lastAccidentDates[dept]))}`;
@@ -574,15 +548,6 @@
         
         // Actualizar total de días sin accidentes
         document.getElementById('totalDaysSafe').textContent = maxDays;
-        
-        // Encontrar el récord máximo
-        let maxRecord = 0;
-        departments.forEach(dept => {
-          if (historicalRecords[dept] > maxRecord) {
-            maxRecord = historicalRecords[dept];
-          }
-        });
-        document.getElementById('recordDaysSafe').textContent = maxRecord;
         
         // Encontrar la fecha del accidente más reciente
         let mostRecentDate = new Date('2000-01-01');
@@ -612,13 +577,13 @@
         let csvContent = "data:text/csv;charset=utf-8,";
         
         // Agregar encabezado
-        csvContent += "Departamento,Días sin accidentes,Récord,Último accidente\n";
+        csvContent += "Departamento,Días sin accidentes,Último accidente\n";
         
         // Agregar datos para cada departamento
         departments.forEach(dept => {
           const daysSince = calculateDaysSince(lastAccidentDates[dept]);
           const lastAccident = formatDate(new Date(lastAccidentDates[dept]));
-          csvContent += `${departmentNames[dept]},${daysSince},${historicalRecords[dept]},${lastAccident}\n`;
+          csvContent += `${departmentNames[dept]},${daysSince},${lastAccident}\n`;
         });
         
         // Crear enlace de descarga
