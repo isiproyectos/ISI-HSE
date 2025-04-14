@@ -6,226 +6,218 @@
   <title>Página</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-  <style>
-    body {
-      min-height: 100vh;
-      overflow-x: hidden;
-    }
-    
-    .sidebar {
-      width: 250px;
-      height: 100vh;
-      position: fixed;
-      top: 0;
-      left: 0;
-      z-index: 1000;
-      transition: all 0.3s;
-      background-color: #f8f9fa;
-      border-right: 1px solid #dee2e6;
-    }
-    
-    .content {
-      margin-left: 250px;
-      transition: all 0.3s;
-    }
-    
-    /* Encabezado con imágenes más separadas */
-    .header {
-      height: 245px;
-      border-bottom: 1px solid #dee2e6;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 0 20px;
-      overflow: hidden;
-    }
-    
-    /* Contenedor del logo alineado a la izquierda */
-    .logo-container {
-      width: 45%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      overflow: hidden;
-      margin-left: 0;
-    }
-    
-    /* Contenedor de usuario alineado a la derecha */
-    .user-container {
-      width: 45%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-    }
-    
-    /* Imágenes más grandes sin recortes */
-    .logo-img {
-      height: 250px;  /* Ajustamos la altura */
-      width: 300px;   /* Ajustamos el ancho */
-      object-fit: contain; /* Asegura que la imagen no se recorte */
-      transform: scale(1); /* Sin escalado adicional */
-      transform-origin: left center;
-    }
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<!-- Google Fonts para la firma - Usando una fuente elegante pero sutil -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+<style>
+  /* Estilos base */
+  html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    display: flex;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+  
+  .sidebar {
+    width: 250px;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 1000;
+    transition: all 0.3s;
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+  }
+  
+  /* Estructura principal con flexbox para mantener el footer abajo */
+  .content {
+    margin-left: 250px;
+    transition: all 0.3s;
+    width: calc(100% - 250px);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh; /* Altura mínima para ocupar toda la pantalla */
+  }
+  
+  /* Encabezado con imágenes más separadas */
+  .header {
+    height: 245px;
+    border-bottom: 1px solid #dee2e6;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    overflow: hidden;
+  }
+  
+  /* Contenedor del logo alineado a la izquierda */
+  .logo-container {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    overflow: hidden;
+    margin-left: 0;
+  }
+  
+  /* Contenedor de usuario alineado a la derecha */
+  .user-container {
+    width: 45%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+  }
+  
+  /* Imágenes más grandes sin recortes */
+  .logo-img {
+    height: 250px;  /* Ajustamos la altura */
+    width: 300px;   /* Ajustamos el ancho */
+    object-fit: contain; /* Asegura que la imagen no se recorte */
+    transform: scale(1); /* Sin escalado adicional */
+    transform-origin: left center;
+  }
 
-    .user-img {
-      height: 250px;  /* Ajustamos la altura */
-      width: 255px;   /* Ajustamos el ancho */
-      object-fit: contain; /* Asegura que la imagen no se recorte */
-      transform: scale(1); /* Sin escalado adicional */
-      transform-origin: right center;
-    }
-    
-    .nav-link {
-      display: flex;
-      align-items: center;
-      padding: 0.5rem 1rem;
-      color: #212529;
-      text-decoration: none;
-    }
-    
-    .nav-link:hover, .nav-link.active {
-      background-color: #e9ecef;
-      color: #0d6efd;
-    }
-    
-    .nav-link i {
-      margin-right: 10px;
-    }
-    
-    .sidebar-divider {
-      margin: 1rem 0;
-      border-top: 1px solid #dee2e6;
-    }
-    
-    /* Mobile styles */
-    @media (max-width: 768px) {
-      .sidebar {
-        margin-left: -250px;
-      }
-      
-      .sidebar.active {
-        margin-left: 0;
-      }
-      
-      .content {
-        margin-left: 0;
-      }
-      
-      .content.active {
-        margin-left: 250px;
-      }
-      
-      .overlay {
-        display: none;
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 999;
-        opacity: 0;
-        transition: all 0.5s ease-in-out;
-      }
-      
-      .overlay.active {
-        display: block;
-        opacity: 1;
-      }
-      
-      .header {
-        height: 150px;
-      }
-      
-      .logo-container, .user-container {
-        height: 150px;
-      }
-      
-      .logo-img, .user-img {
-        height: 120px;
-        width: 120px;
-      }
-      
-      /* Ajuste para el botón de menú en móvil */
-      #sidebarToggle {
-        position: absolute;
-        left: 5px;
-        top: 5px;
-        z-index: 10;
-      }
-    }
-    
-    /* Asegurar que todas las imágenes de las tarjetas tengan el mismo tamaño */
-    .card-img-top {
-      height: 200px; /* Ajusta la altura que deseas */
-      width: 100%;   /* Hace que las imágenes ocupen todo el ancho del contenedor */
-      object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
-    }
-    
-    /* Estilos para el gestor de documentos */
-    .document-card {
-      transition: all 0.2s ease;
-      height: 100%;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .document-card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-    }
-    
-    .document-actions {
-      margin-top: auto;
-    }
-    
-    .document-manager {
-      background-color: #fff;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      margin-bottom: 2rem;
-      padding: 1.5rem;
-    }
-    
-    .document-list {
-      background-color: #fff;
-      border-radius: 0.5rem;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-      padding: 1.5rem;
-    }
-    
-    .main-content {
-      padding: 2rem;
-    }
-    
-    /* Estilos para el panel de administración */
-    .admin-panel {
-      background-color: #f8f9fa;
-      border: 2px dashed #dc3545;
-      padding: 15px;
-      margin-bottom: 20px;
-      border-radius: 5px;
-    }
-     
-    .admin-badge {
-      background-color: #dc3545;
-      color: white;
-      padding: 3px 8px;
-      border-radius: 10px;
-      font-size: 12px;
-      margin-left: 10px;
-    }
-     
-    .code-output {
-      width: 100%;
-      height: 200px;
-      font-family: monospace;
-      padding: 10px;
-      margin-top: 10px;
-      white-space: pre;
-      overflow: auto;
-    }
-  </style>
+  .user-img {
+    height: 250px;  /* Ajustamos la altura */
+    width: 255px;   /* Ajustamos el ancho */
+    object-fit: contain; /* Asegura que la imagen no se recorte */
+    transform: scale(1); /* Sin escalado adicional */
+    transform-origin: right center;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    padding: 0.5rem 1rem;
+    color: #212529;
+    text-decoration: none;
+  }
+  
+  .nav-link:hover, .nav-link.active {
+    background-color: #e9ecef;
+    color: #0d6efd;
+  }
+  
+  .nav-link i {
+    margin-right: 10px;
+  }
+  
+  .sidebar-divider {
+    margin: 1rem 0;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  /* El contenido principal debe crecer para empujar el footer hacia abajo */
+  .main-content {
+    flex: 1; /* Esto hace que ocupe todo el espacio disponible */
+    padding: 2rem;
+  }
+  
+  /* Estilos para la firma como footer fijo */
+  .signature-container {
+    width: 100%;
+    padding: 12px 25px;
+    text-align: center;
+    border-top: 1px solid #eaeaea;
+    background-color: transparent;
+    margin-top: auto; /* Esto es crucial para empujar el footer hacia abajo */
+  }
+  
+    /* Asegúrate de que el body y html tengan altura completa */
+    html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* Estructura para mantener el footer abajo */
+.content {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* El contenido principal debe crecer para empujar el footer hacia abajo */
+.main-content {
+  flex: 1;
+}
+
+/* Estilos para la firma como footer fijo */
+.signature-container {
+  margin-top: auto; /* Empuja la firma hacia abajo */
+  width: 100%;
+  padding: 12px 25px;
+  text-align: center;
+  border-top: 1px solid #eaeaea;
+  background-color: transparent;
+}
+
+/* Resto de los estilos de la firma se mantienen igual */
+.signature-content {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.signature-divider {
+  display: inline-block;
+  width: 40px;
+  height: 1px;
+  background: linear-gradient(to right, transparent, #adb5bd, transparent);
+  margin: 0 10px;
+}
+
+.signature-text {
+  font-family: 'Nunito', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: #868e96;
+  letter-spacing: 0.3px;
+  transition: all 0.3s ease;
+}
+
+.signature-text:hover {
+  color: #495057;
+}
+
+.signature-name {
+  font-weight: 400;
+}
+
+.signature-social {
+  display: inline-block;
+}
+
+.signature-social a {
+  color: #868e96;
+  margin: 0 4px;
+  font-size: 13px;
+  transition: all 0.3s ease;
+}
+
+.signature-social a:hover {
+  color: #495057;
+  transform: translateY(-2px);
+}
+
+/* Ajustes para móvil */
+@media (max-width: 768px) {
+  .signature-container {
+    padding: 10px;
+  }
+  
+  .signature-divider {
+    width: 30px;
+  }
+}
+</style>
 </head>
 <body>
   <!-- Sidebar -->
@@ -308,10 +300,22 @@
     <!-- Main content -->
     <div class="main-content">
       <h1 class="mb-4">¿que sera?</h1>
-      
+    </div>
 
 
-
+  <!-- Firma personalizada elegante pero discreta -->
+  <footer class="signature-container">
+    <div class="signature-content">
+      <span class="signature-divider"></span>
+      <span class="signature-text">Diseñado por <span class="signature-name">Ing.Saúl Silva Rodriguez</span> © <span id="current-year"></span></span>
+      <div class="signature-social">
+        <a href="https://www.linkedin.com/in/saul-silva-rodr%C3%ADguez-43b241274?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/isiproyectos" title="GitHub"><i class="bi bi-github"></i></a>
+        <a href="mailto:edreirdz1224@gmail.com" title="Correo electrónico"><i class="bi bi-envelope-fill"></i></a>
+      </div>
+      <span class="signature-divider"></span>
+    </div>
+  </footer>
 
         <!-- Bootstrap Bundle with Popper -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
@@ -347,6 +351,15 @@
         }
       });
     });
+      // Actualizar el año actual en la firma
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  });
+
   </script>
+
+  
+  
+
 </body>
 </html>

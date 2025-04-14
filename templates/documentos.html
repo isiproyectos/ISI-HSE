@@ -6,8 +6,10 @@
   <title>Página de Documentos</title>
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- Bootstrap Icons -->
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<!-- Bootstrap Icons -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
+<!-- Google Fonts para la firma - Usando una fuente elegante pero sutil -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
   <style>
     body {
       min-height: 100vh;
@@ -243,6 +245,109 @@
       display: flex;
       align-items: center;
     }
+   /* El contenido principal debe crecer para empujar el footer hacia abajo */
+   .main-content {
+      flex: 1; /* Esto hace que ocupe todo el espacio disponible */
+      padding: 2rem;
+    }
+    
+    /* Estilos para la firma como footer fijo */
+    .signature-container {
+      width: 100%;
+      padding: 12px 25px;
+      text-align: center;
+      border-top: 1px solid #eaeaea;
+      background-color: transparent;
+      margin-top: auto; /* Esto es crucial para empujar el footer hacia abajo */
+    }
+    
+       /* Asegúrate de que el body y html tengan altura completa */
+       html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+  
+  /* Estructura para mantener el footer abajo */
+  .content {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* El contenido principal debe crecer para empujar el footer hacia abajo */
+  .main-content {
+    flex: 1;
+  }
+  
+  /* Estilos para la firma como footer fijo */
+  .signature-container {
+    margin-top: auto; /* Empuja la firma hacia abajo */
+    width: 100%;
+    padding: 12px 25px;
+    text-align: center;
+    border-top: 1px solid #eaeaea;
+    background-color: transparent;
+  }
+  
+  /* Resto de los estilos de la firma se mantienen igual */
+  .signature-content {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .signature-divider {
+    display: inline-block;
+    width: 40px;
+    height: 1px;
+    background: linear-gradient(to right, transparent, #adb5bd, transparent);
+    margin: 0 10px;
+  }
+  
+  .signature-text {
+    font-family: 'Nunito', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    color: #868e96;
+    letter-spacing: 0.3px;
+    transition: all 0.3s ease;
+  }
+  
+  .signature-text:hover {
+    color: #495057;
+  }
+  
+  .signature-name {
+    font-weight: 400;
+  }
+  
+  .signature-social {
+    display: inline-block;
+  }
+  
+  .signature-social a {
+    color: #868e96;
+    margin: 0 4px;
+    font-size: 13px;
+    transition: all 0.3s ease;
+  }
+  
+  .signature-social a:hover {
+    color: #495057;
+    transform: translateY(-2px);
+  }
+  
+  /* Ajustes para móvil */
+  @media (max-width: 768px) {
+    .signature-container {
+      padding: 10px;
+    }
+    
+    .signature-divider {
+      width: 30px;
+    }
+  }
   </style>
   
   <!-- Verificación de autenticación -->
@@ -395,7 +500,7 @@
         </div>
       </div>
     </div>
-  </div>
+  
 
   <!-- Modal para visualizar documentos -->
   <div class="modal fade" id="viewDocumentModal" tabindex="-1" aria-labelledby="viewDocumentModalLabel" aria-hidden="true">
@@ -412,6 +517,20 @@
     </div>
   </div>
   
+     <!-- Firma personalizada elegante pero discreta -->
+     <footer class="signature-container">
+      <div class="signature-content">
+        <span class="signature-divider"></span>
+        <span class="signature-text">Diseñado por <span class="signature-name">Ing.Saúl Silva Rodriguez</span> © <span id="current-year"></span></span>
+        <div class="signature-social">
+          <a href="https://www.linkedin.com/in/saul-silva-rodr%C3%ADguez-43b241274?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+          <a href="https://github.com/isiproyectos" title="GitHub"><i class="bi bi-github"></i></a>
+          <a href="mailto:edreirdz1224@gmail.com" title="Correo electrónico"><i class="bi bi-envelope-fill"></i></a>
+        </div>
+        <span class="signature-divider"></span>
+      </div>
+    </footer>
+  </div>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
   <!-- Custom JavaScript -->
@@ -799,6 +918,12 @@
       document.execCommand('copy');
       alert("¡Código copiado al portapapeles!");
     }
+      // Actualizar el año actual en la firma
+  document.addEventListener('DOMContentLoaded', function() {
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+  });
+
   </script>
+
 </body>
 </html>
