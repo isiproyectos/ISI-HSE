@@ -1,25 +1,19 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard de Seguridad</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-<!-- Google Fonts para la firma - Usando una fuente elegante pero sutil -->
+<!-- Google Fonts para la firma -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
+<!-- Chart.js -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 <style>
-  /* Estilos base */
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
   body {
-    display: flex;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -36,14 +30,9 @@
     border-right: 1px solid #dee2e6;
   }
   
-  /* Estructura principal con flexbox para mantener el footer abajo */
   .content {
     margin-left: 250px;
     transition: all 0.3s;
-    width: calc(100% - 250px);
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh; /* Altura mínima para ocupar toda la pantalla */
   }
   
   /* Encabezado con imágenes más separadas */
@@ -114,23 +103,210 @@
     border-top: 1px solid #dee2e6;
   }
   
-  /* El contenido principal debe crecer para empujar el footer hacia abajo */
-  .main-content {
-    flex: 1; /* Esto hace que ocupe todo el espacio disponible */
-    padding: 2rem;
+  /* Mobile styles */
+  @media (max-width: 768px) {
+    .sidebar {
+      margin-left: -250px;
+    }
+    
+    .sidebar.active {
+      margin-left: 0;
+    }
+    
+    .content {
+      margin-left: 0;
+    }
+    
+    .content.active {
+      margin-left: 250px;
+    }
+    
+    .overlay {
+      display: none;
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      transition: all 0.5s ease-in-out;
+    }
+    
+    .overlay.active {
+      display: block;
+      opacity: 1;
+    }
+    
+    .header {
+      height: 150px;
+    }
+    
+    .logo-container, .user-container {
+      height: 150px;
+    }
+    
+    .logo-img, .user-img {
+      height: 120px;
+      width: 120px;
+    }
+    
+    /* Ajuste para el botón de menú en móvil */
+    #sidebarToggle {
+      position: absolute;
+      left: 5px;
+      top: 5px;
+      z-index: 10;
+    }
   }
   
-  /* Estilos para la firma como footer fijo */
-  .signature-container {
+  /* Estilos para estadísticas */
+  .stats-card {
+    border-radius: 10px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+    height: 100%;
+  }
+  
+  .stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  }
+  
+  .counter-container {
+    text-align: center;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+  }
+  
+  .counter-label {
+    font-size: 1.2rem;
+    color: #6c757d;
+    margin-bottom: 15px;
+  }
+  
+  .counter-subtitle {
+    font-size: 0.9rem;
+    color: #6c757d;
+  }
+  
+  .stats-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .department-admin {
+    background-color: rgba(13, 110, 253, 0.1);
+    border-left: 5px solid #0d6efd;
+  }
+  
+  .department-projects {
+    background-color: rgba(25, 135, 84, 0.1);
+    border-left: 5px solid #198754;
+  }
+  
+  .department-services {
+    background-color: rgba(220, 53, 69, 0.1);
+    border-left: 5px solid #dc3545;
+  }
+  
+  .department-admin .counter {
+    color: #0d6efd;
+  }
+  
+  .department-projects .counter {
+    color: #198754;
+  }
+  
+  .department-services .counter {
+    color: #dc3545;
+  }
+  
+  .accident-date {
+    font-size: 0.9rem;
+    color: #6c757d;
+    margin-top: 5px;
+  }
+  
+  .stats-summary {
+    background-color: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    margin-bottom: 30px;
+  }
+  
+  .summary-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: #212529;
+  }
+  
+  .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #dee2e6;
+  }
+  
+  .summary-label {
+    font-weight: 500;
+  }
+  
+  .summary-value {
+    font-weight: 600;
+  }
+  
+  .reset-button {
+    margin-top: 15px;
+  }
+  
+  .last-updated {
+    text-align: right;
+    font-size: 0.8rem;
+    color: #6c757d;
+    margin-top: 10px;
+  }
+  
+  /* Estilos para gráficos */
+  .chart-container {
+    position: relative;
+    height: 300px;
     width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Gráficos pequeños para departamentos */
+  .mini-chart-container {
+    position: relative;
+    height: 120px;
+    width: 100%;
+    margin: 10px 0;
+  }
+  
+  .days-counter {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 700;
+    z-index: 10;
+    text-shadow: 0 0 5px white, 0 0 5px white, 0 0 5px white, 0 0 5px white;
+  }
+  
+  /* Estilos para la firma */
+  .signature-container {
+    margin-top: auto;
     padding: 12px 25px;
     text-align: center;
     border-top: 1px solid #eaeaea;
     background-color: transparent;
-    margin-top: auto; /* Esto es crucial para empujar el footer hacia abajo */
   }
   
-  /* Resto de los estilos de la firma se mantienen igual */
   .signature-content {
     display: inline-flex;
     align-items: center;
@@ -178,290 +354,526 @@
     transform: translateY(-2px);
   }
   
-  /* Mobile styles */
+  /* Ajustes para móvil */
   @media (max-width: 768px) {
-    .sidebar {
-      margin-left: -250px;
-    }
-    
-    .sidebar.active {
-      margin-left: 0;
-    }
-    
-    .content {
-      margin-left: 0;
-      width: 100%;
-    }
-    
-    .content.active {
-      margin-left: 250px;
-      width: calc(100% - 250px);
-    }
-    
-    .overlay {
-      display: none;
-      position: fixed;
-      width: 100vw;
-      height: 100vh;
-      background: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-      opacity: 0;
-      transition: all 0.5s ease-in-out;
-    }
-    
-    .overlay.active {
-      display: block;
-      opacity: 1;
-    }
-    
-    .header {
-      height: 150px;
-    }
-    
-    .logo-container, .user-container {
-      height: 150px;
-    }
-    
-    .logo-img, .user-img {
-      height: 120px;
-      width: 120px;
-    }
-    
-    /* Ajuste para el botón de menú en móvil */
-    #sidebarToggle {
-      position: absolute;
-      left: 5px;
-      top: 5px;
-      z-index: 10;
-    }
-    
     .signature-container {
-  width: 100%;
-  padding: 12px 25px;
-  text-align: center;
-  border-top: 1px solid #eaeaea;
-  background-color: transparent;
-  position: fixed; /* Cambiado a posición fija */
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  margin-top: 20px; /* Espacio mínimo sobre el footer */
-}
+      padding: 10px;
+    }
     
     .signature-divider {
       width: 30px;
     }
   }
-  
-  /* Asegurar que todas las imágenes de las tarjetas tengan el mismo tamaño */
-  .card-img-top {
-    height: 200px; /* Ajusta la altura que deseas */
-    width: 100%;   /* Hace que las imágenes ocupen todo el ancho del contenedor */
-    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
-  }
-  
-  /* Estilos para el gestor de documentos */
-  .document-card {
-    transition: all 0.2s ease;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .document-card:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-  }
-  
-  .document-actions {
-    margin-top: auto;
-  }
-  
-  .document-manager {
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-  }
-  
-  .document-list {
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 1.5rem;
-  }
-  
-  /* Estilos para el panel de administración */
-  .admin-panel {
-    background-color: #f8f9fa;
-    border: 2px dashed #dc3545;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
-  }
-   
-  .admin-badge {
-    background-color: #dc3545;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    margin-left: 10px;
-  }
-   
-  .code-output {
-    width: 100%;
-    height: 200px;
-    font-family: monospace;
-    padding: 10px;
-    margin-top: 10px;
-    white-space: pre;
-    overflow: auto;
-  }
 </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
-    <div class="p-3 border-bottom">
-      <h3 class="fs-5 fw-semibold">HSE Proyectos</h3>
-    </div>
-    
-    <div class="p-2">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a href="../index.html" class="nav-link">
-            <i class="bi bi-house-door"></i> Inicio
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link active">
-            <i class="bi bi-grid"></i> Dashboard
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/usuarios.html" class="nav-link">
-            <i class="bi bi-people"></i> Usuarios
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/documentos.html" class="nav-link ">
-            <i class="bi bi-file-text"></i> Documentos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/calendario.html" class="nav-link">
-            <i class="bi bi-calendar"></i> Calendario
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/estadísticas.html" class="nav-link ">
-            <i class="bi bi-bar-chart"></i> Estadísticas
-          </a>
-        </li>
-      </ul>
-      
-      <div class="sidebar-divider"></div>
-      
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a href="../templates/nosotros.html" class="nav-link">
-            <i class="bi bi-question-circle"></i> ¿Quienes Somos?
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Overlay for mobile -->
-  <div id="overlay" class="overlay"></div>
-
-  <!-- Page content -->
-  <div id="content" class="content">
-    <!-- Header with images -->
-    <header class="header">
-      <!-- Logo container -->
-      <div class="logo-container">
-        <!-- Mobile sidebar toggle -->
-        <button id="sidebarToggle" class="btn btn-outline-secondary me-2 d-md-none">
-          <i class="bi bi-list"></i>
-        </button>
-        
-        <!-- Top-left image -->
-        <img src="../static/ISI.png" alt="Logo" class="logo-img">
-      </div>
-      
-      <!-- User image container -->
-      <div class="user-container">
-        <!-- Top-right image -->
-        <img src="../static/proyectos logo2.png" alt="Usuario" class="user-img">
-      </div>
-    </header>
-
-    <!-- Main content -->
-    <div class="main-content">
-      <h1 class="mb-4">agregar para que servira</h1>
-
-
-    </div>
-    
-
-    <!-- Firma personalizada elegante pero discreta -->
-    <footer class="signature-container">
-      <div class="signature-content">
-        <span class="signature-divider"></span>
-        <span class="signature-text">Diseñado por <span class="signature-name">Ing.Saúl Silva Rodriguez</span> © <span id="current-year"></span></span>
-        <div class="signature-social">
-          <a href="https://www.linkedin.com/in/saul-silva-rodr%C3%ADguez-43b241274?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-          <a href="https://github.com/isiproyectos" title="GitHub"><i class="bi bi-github"></i></a>
-          <a href="mailto:edreirdz1224@gmail.com" title="Correo electrónico"><i class="bi bi-envelope-fill"></i></a>
-        </div>
-        <span class="signature-divider"></span>
-      </div>
-    </footer>
+<!-- Sidebar -->
+<nav id="sidebar" class="sidebar">
+  <div class="p-3 border-bottom">
+    <h3 class="fs-5 fw-semibold">HSE Proyectos</h3>
   </div>
-        <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-  <!-- Custom JavaScript -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const sidebar = document.getElementById('sidebar');
-      const content = document.getElementById('content');
-      const overlay = document.getElementById('overlay');
-      const sidebarToggle = document.getElementById('sidebarToggle');
+  <div class="p-2">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a href="../index.html" class="nav-link">
+          <i class="bi bi-house-door"></i> Inicio
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link active">
+          <i class="bi bi-grid"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/usuarios.html" class="nav-link">
+          <i class="bi bi-people"></i> Usuarios
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/documentos.html" class="nav-link">
+          <i class="bi bi-file-text"></i> Documentos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/calendario.html" class="nav-link">
+          <i class="bi bi-calendar"></i> Calendario
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/estadísticas.html" class="nav-link">
+          <i class="bi bi-bar-chart"></i> Estadísticas
+        </a>
+      </li>
+    </ul>
+    
+    <div class="sidebar-divider"></div>
+    
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a href="../templates/nosotros.html" class="nav-link">
+          <i class="bi bi-question-circle"></i> ¿Quienes Somos?
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div id="overlay" class="overlay"></div>
+
+<!-- Page content -->
+<div id="content" class="content">
+  <!-- Header with images -->
+  <header class="header">
+    <!-- Logo container -->
+    <div class="logo-container">
+      <!-- Mobile sidebar toggle -->
+      <button id="sidebarToggle" class="btn btn-outline-secondary me-2 d-md-none">
+        <i class="bi bi-list"></i>
+      </button>
       
-      // Toggle sidebar on mobile
-      sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
-        content.classList.toggle('active');
-        overlay.classList.toggle('active');
-      });
+      <!-- Top-left image -->
+      <img src="../static/ISI.png" alt="Logo" class="logo-img">
+    </div>
+    
+    <!-- User image container -->
+    <div class="user-container">
+      <!-- Top-right image -->
+      <img src="../static/proyectos logo2.png" alt="Usuario" class="user-img">
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <div class="main-content p-4">
+    <div class="stats-header">
+      <h1 class="mb-0">
+        <i class="bi bi-shield-check text-success me-2"></i>
+        Dashboard de Seguridad
+      </h1>
       
-      // Close sidebar when clicking on overlay
-      overlay.addEventListener('click', function() {
+      <button id="exportData" class="btn btn-outline-primary">
+        <i class="bi bi-download me-2"></i>Exportar Datos
+      </button>
+    </div>
+
+    <div class="stats-summary mb-4">
+      <div class="summary-title">Resumen General</div>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="summary-item">
+            <span class="summary-label">Total días sin accidentes:</span>
+            <span id="totalDaysSafe" class="summary-value">0</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="summary-item">
+            <span class="summary-label">Último accidente:</span>
+            <span id="lastAccidentDate" class="summary-value">Ninguno registrado</span>
+          </div>
+        </div>
+      </div>
+      <div class="last-updated mt-2 text-end">
+        Última actualización: <span id="lastUpdatedDate">-</span>
+      </div>
+    </div>
+
+    <div class="row mb-4">
+      <div class="col-md-4 mb-4">
+        <div class="stats-card department-admin">
+          <div class="counter-container">
+            <h3>Administración</h3>
+            <div class="mini-chart-container">
+              <div id="adminCounter" class="days-counter">0</div>
+              <canvas id="adminChart"></canvas>
+            </div>
+            <div class="counter-label">Días sin accidentes</div>
+            <div id="adminLastAccident" class="accident-date">Último accidente: Ninguno</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="stats-card department-projects">
+          <div class="counter-container">
+            <h3>Proyectos</h3>
+            <div class="mini-chart-container">
+              <div id="projectsCounter" class="days-counter">0</div>
+              <canvas id="projectsChart"></canvas>
+            </div>
+            <div class="counter-label">Días sin accidentes</div>
+            <div id="projectsLastAccident" class="accident-date">Último accidente: Ninguno</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="stats-card department-services">
+          <div class="counter-container">
+            <h3>Servicios</h3>
+            <div class="mini-chart-container">
+              <div id="servicesCounter" class="days-counter">0</div>
+              <canvas id="servicesChart"></canvas>
+            </div>
+            <div class="counter-label">Días sin accidentes</div>
+            <div id="servicesLastAccident" class="accident-date">Último accidente: Ninguno</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Gráficos -->
+    <div class="row mb-4">
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Historial de Días Sin Accidentes</h5>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="historyChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h5 class="mb-0">Comparativa por Departamento</h5>
+          </div>
+          <div class="card-body">
+            <div class="chart-container">
+              <canvas id="departmentChart"></canvas>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+  
+  </div>
+
+  <!-- Firma personalizada elegante pero discreta -->
+  <footer class="signature-container">
+    <div class="signature-content">
+      <span class="signature-divider"></span>
+      <span class="signature-text">Diseñado por <span class="signature-name">Ing.Saúl Silva Rodriguez</span> © <span id="current-year"></span></span>
+      <div class="signature-social">
+        <a href="https://www.linkedin.com/in/saul-silva-rodr%C3%ADguez-43b241274?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/isiproyectos" title="GitHub"><i class="bi bi-github"></i></a>
+        <a href="mailto:edreirdz1224@gmail.com" title="Correo electrónico"><i class="bi bi-envelope-fill"></i></a>
+      </div>
+      <span class="signature-divider"></span>
+    </div>
+  </footer>
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const overlay = document.getElementById('overlay');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    
+    // Toggle sidebar on mobile
+    sidebarToggle.addEventListener('click', function() {
+      sidebar.classList.toggle('active');
+      content.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking on overlay
+    overlay.addEventListener('click', function() {
+      sidebar.classList.remove('active');
+      content.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    
+    // Close sidebar on window resize if screen becomes larger
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
         sidebar.classList.remove('active');
         content.classList.remove('active');
         overlay.classList.remove('active');
+      }
+    });
+    
+    // Actualizar el año actual en la firma
+    document.getElementById('current-year').textContent = new Date().getFullYear();
+
+    // Fechas del último accidente por departamento
+    const lastAccidentDates = {
+      admin: '2024-08-18',
+      projects: '2024-12-14',
+      services: '2024-12-06'
+    };
+
+    // Funciones utilitarias
+    function calculateDaysSince(dateString) {
+      const lastDate = new Date(dateString);
+      const today = new Date();
+      lastDate.setHours(0, 0, 0, 0);
+      today.setHours(0, 0, 0, 0);
+      return Math.floor((today - lastDate) / (1000 * 60 * 60 * 24));
+    }
+
+    function formatDate(date) {
+      return date.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric'
       });
+    }
+
+    function formatDateTime(date) {
+      return date.toLocaleDateString('es-ES', {
+        day: '2-digit',
+        month: '2-digit',
+        year: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit'
+      });
+    }
+
+    // Generar datos históricos simulados
+    function generateHistoricalData(startDays, variance, length) {
+      const data = [];
+      let currentValue = startDays;
       
-      // Close sidebar on window resize if screen becomes larger
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-          sidebar.classList.remove('active');
-          content.classList.remove('active');
-          overlay.classList.remove('active');
+      for (let i = 0; i < length; i++) {
+        // Simular un incremento diario con pequeñas variaciones
+        currentValue += 1 + Math.random() * variance - variance/2;
+        // Simular posibles accidentes (reinicio del contador)
+        if (Math.random() < 0.03) {
+          currentValue = 0;
+        }
+        data.push(Math.max(0, Math.floor(currentValue)));
+      }
+      
+      return data;
+    }
+
+    function updateDashboard() {
+      const departments = ['admin', 'projects', 'services'];
+      const today = new Date();
+      document.getElementById('lastUpdatedDate').textContent = formatDateTime(today);
+      let minDays = Infinity;
+      let recentDate = new Date('2000-01-01');
+
+      departments.forEach(dept => {
+        const days = calculateDaysSince(lastAccidentDates[dept]);
+        const date = new Date(lastAccidentDates[dept]);
+
+        document.getElementById(`${dept}Counter`).textContent = days;
+        document.getElementById(`${dept}LastAccident`).textContent = `Último accidente: ${formatDate(date)}`;
+        
+        if (days < minDays) minDays = days;
+        if (date > recentDate) recentDate = date;
+      });
+
+      document.getElementById('totalDaysSafe').textContent = minDays;
+      document.getElementById('lastAccidentDate').textContent = formatDate(recentDate);
+    }
+
+    // Exportar CSV
+    document.getElementById('exportData').addEventListener('click', function() {
+      const departments = ['admin', 'projects', 'services'];
+      const names = { admin: 'Administración', projects: 'Proyectos', services: 'Servicios' };
+      let csv = "Departamento,Días sin accidentes,Último accidente\n";
+
+      departments.forEach(dept => {
+        const days = calculateDaysSince(lastAccidentDates[dept]);
+        const last = formatDate(new Date(lastAccidentDates[dept]));
+        csv += `${names[dept]},${days},${last}\n`;
+      });
+
+      const blob = new Blob([csv], { type: "text/csv" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      link.href = url;
+      link.download = `estadisticas_seguridad_${new Date().toISOString().split('T')[0]}.csv`;
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    });
+
+    // Inicializar mini gráficos para cada departamento
+    function initMiniCharts() {
+      // Configuración común para los mini gráficos
+      const miniChartConfig = {
+        type: 'line',
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: { enabled: false }
+          },
+          scales: {
+            x: { display: false },
+            y: { display: false }
+          },
+          elements: {
+            point: { radius: 0 },
+            line: { tension: 0.4 }
+          },
+          animation: false
+        }
+      };
+      
+      // Datos para los últimos 30 días
+      const adminData = generateHistoricalData(calculateDaysSince(lastAccidentDates.admin), 1, 30);
+      const projectsData = generateHistoricalData(calculateDaysSince(lastAccidentDates.projects), 1, 30);
+      const servicesData = generateHistoricalData(calculateDaysSince(lastAccidentDates.services), 1, 30);
+      
+      // Etiquetas (no visibles pero necesarias)
+      const labels = Array.from({length: 30}, (_, i) => i + 1);
+      
+      // Gráfico para Administración
+      const adminCtx = document.getElementById('adminChart').getContext('2d');
+      new Chart(adminCtx, {
+        ...miniChartConfig,
+        data: {
+          labels: labels,
+          datasets: [{
+            data: adminData,
+            borderColor: '#0d6efd',
+            backgroundColor: 'rgba(13, 110, 253, 0.2)',
+            fill: true
+          }]
         }
       });
-    });
-  
-  // Actualizar el año actual en la firma
-  document.addEventListener('DOMContentLoaded', function() {
-    document.getElementById('current-year').textContent = new Date().getFullYear();
+      
+      // Gráfico para Proyectos
+      const projectsCtx = document.getElementById('projectsChart').getContext('2d');
+      new Chart(projectsCtx, {
+        ...miniChartConfig,
+        data: {
+          labels: labels,
+          datasets: [{
+            data: projectsData,
+            borderColor: '#198754',
+            backgroundColor: 'rgba(25, 135, 84, 0.2)',
+            fill: true
+          }]
+        }
+      });
+      
+      // Gráfico para Servicios
+      const servicesCtx = document.getElementById('servicesChart').getContext('2d');
+      new Chart(servicesCtx, {
+        ...miniChartConfig,
+        data: {
+          labels: labels,
+          datasets: [{
+            data: servicesData,
+            borderColor: '#dc3545',
+            backgroundColor: 'rgba(220, 53, 69, 0.2)',
+            fill: true
+          }]
+        }
+      });
+    }
+
+    // Inicializar gráficos principales
+    function initCharts() {
+      // Datos para el gráfico de historial
+      const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+      const historyData = [45, 60, 75, 90, 30, 45, 60, 75, 90, 105, 120, 135];
+      
+      // Gráfico de historial
+      const historyCtx = document.getElementById('historyChart').getContext('2d');
+      new Chart(historyCtx, {
+        type: 'line',
+        data: {
+          labels: months,
+          datasets: [{
+            label: 'Días sin accidentes',
+            data: historyData,
+            borderColor: '#0d6efd',
+            backgroundColor: 'rgba(13, 110, 253, 0.1)',
+            tension: 0.4,
+            fill: true
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: true,
+              position: 'top'
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Días'
+              }
+            }
+          }
+        }
+      });
+      
+      // Datos para el gráfico de departamentos
+      const departments = ['Administración', 'Proyectos', 'Servicios'];
+      const deptData = [
+        calculateDaysSince(lastAccidentDates.admin),
+        calculateDaysSince(lastAccidentDates.projects),
+        calculateDaysSince(lastAccidentDates.services)
+      ];
+      
+      // Gráfico de departamentos
+      const deptCtx = document.getElementById('departmentChart').getContext('2d');
+      new Chart(deptCtx, {
+        type: 'bar',
+        data: {
+          labels: departments,
+          datasets: [{
+            label: 'Días sin accidentes',
+            data: deptData,
+            backgroundColor: [
+              'rgba(13, 110, 253, 0.7)',
+              'rgba(25, 135, 84, 0.7)',
+              'rgba(220, 53, 69, 0.7)'
+            ],
+            borderColor: [
+              '#0d6efd',
+              '#198754',
+              '#dc3545'
+            ],
+            borderWidth: 1
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              display: false
+            }
+          },
+          scales: {
+            y: {
+              beginAtZero: true,
+              title: {
+                display: true,
+                text: 'Días'
+              }
+            }
+          }
+        }
+      });
+    }
+
+    updateDashboard();
+    initMiniCharts();
+    initCharts();
   });
-
-  </script>
-
+</script>
 </body>
 </html>
