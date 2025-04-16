@@ -12,16 +12,11 @@
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
 <style>
   /* Estilos base */
-  html, body {
-    height: 100%;
-    margin: 0;
-    padding: 0;
-  }
-  
   body {
-    display: flex;
     min-height: 100vh;
     overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
   }
   
   .sidebar {
@@ -40,10 +35,9 @@
   .content {
     margin-left: 250px;
     transition: all 0.3s;
-    width: calc(100% - 250px);
+    flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 100vh; /* Altura mínima para ocupar toda la pantalla */
   }
   
   /* Encabezado con imágenes más separadas */
@@ -120,14 +114,13 @@
     padding: 2rem;
   }
   
-  /* Estilos para la firma como footer fijo */
+  /* Estilos para la firma como footer */
   .signature-container {
-    width: 100%;
+    margin-top: auto;
     padding: 12px 25px;
     text-align: center;
     border-top: 1px solid #eaeaea;
     background-color: transparent;
-    margin-top: auto; /* Esto es crucial para empujar el footer hacia abajo */
   }
   
   /* Resto de los estilos de la firma se mantienen igual */
@@ -190,12 +183,10 @@
     
     .content {
       margin-left: 0;
-      width: 100%;
     }
     
     .content.active {
       margin-left: 250px;
-      width: calc(100% - 250px);
     }
     
     .overlay {
@@ -235,18 +226,10 @@
       z-index: 10;
     }
     
+    /* Ajustes para la firma en móvil */
     .signature-container {
-  width: 100%;
-  padding: 12px 25px;
-  text-align: center;
-  border-top: 1px solid #eaeaea;
-  background-color: transparent;
-  position: fixed; /* Cambiado a posición fija */
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  margin-top: 20px; /* Espacio mínimo sobre el footer */
-}
+      padding: 10px;
+    }
     
     .signature-divider {
       width: 30px;
