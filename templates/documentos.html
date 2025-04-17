@@ -194,6 +194,7 @@
       border-radius: 0.5rem;
       box-shadow: 0 4px 6px rgba(0,0,0,0.1);
       padding: 1.5rem;
+      margin-bottom: 2rem; /* Añadido margen inferior para separar las secciones */
     }
     
     .main-content {
@@ -465,6 +466,7 @@
         
         <form id="documentForm">
           <input type="hidden" id="documentId" value="">
+          <input type="hidden" id="documentSection" value="general">
           <div class="mb-3">
             <label for="documentName" class="form-label">Nombre del documento</label>
             <input type="text" class="form-control" id="documentName" placeholder="Ej: Manual de seguridad" required>
@@ -474,6 +476,19 @@
             <label for="documentUrl" class="form-label">URL de Google Drive</label>
             <input type="text" class="form-control" id="documentUrl" placeholder="https://drive.google.com/file/d/..." required>
             <div class="form-text">Ingresa la URL completa del documento de Google Drive</div>
+          </div>
+          
+          <div class="mb-3">
+            <label for="sectionSelect" class="form-label">Sección</label>
+            <select class="form-select" id="sectionSelect" required>
+              <option value="general">Documentos disponibles</option>
+              <option value="checklist">FORMATOS CHECK LIST DE SEGURIDAD</option>
+              <option value="materiales">FORMATOS DE CONTROL DE MATERIALES</option>
+              <option value="personal">FORMATOS DE CONTROL DE PERSONAL Y SALUD</option>
+              <option value="instalacion">PROCEDIMIENTOS DE INSTALACION Y PRUEBAS</option>
+              <option value="calidad">PROCEDIMIENTOS PARA ASEGURAR LA CALIDAD</option>
+              <option value="reglamento">REGLAMENTO DE SEGURIDAD</option>
+            </select>
           </div>
           
           <div class="d-flex gap-2">
@@ -494,6 +509,84 @@
         <div id="documentsList" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
           <!-- Los documentos se cargarán aquí dinámicamente -->
           <div class="col text-center text-muted py-5" id="emptyMessage">
+            <i class="bi bi-file-earmark-x fs-1"></i>
+            <p>No hay documentos agregados</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FORMATOS CHECK LIST DE SEGURIDAD -->
+      <div class="document-list">
+        <h2 class="fs-4 mb-3">FORMATOS CHECK LIST DE SEGURIDAD</h2>
+        
+        <div id="documentsList-checklist" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <!-- Los documentos se cargarán aquí dinámicamente -->
+          <div class="col text-center text-muted py-5" id="emptyMessage-checklist">
+            <i class="bi bi-file-earmark-x fs-1"></i>
+            <p>No hay documentos agregados</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FORMATOS DE CONTROL DE MATERIALES -->
+      <div class="document-list">
+        <h2 class="fs-4 mb-3">FORMATOS DE CONTROL DE MATERIALES</h2>
+        
+        <div id="documentsList-materiales" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <!-- Los documentos se cargarán aquí dinámicamente -->
+          <div class="col text-center text-muted py-5" id="emptyMessage-materiales">
+            <i class="bi bi-file-earmark-x fs-1"></i>
+            <p>No hay documentos agregados</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- FORMATOS DE CONTROL DE PERSONAL Y SALUD -->
+      <div class="document-list">
+        <h2 class="fs-4 mb-3">FORMATOS DE CONTROL DE PERSONAL Y SALUD</h2>
+        
+        <div id="documentsList-personal" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <!-- Los documentos se cargarán aquí dinámicamente -->
+          <div class="col text-center text-muted py-5" id="emptyMessage-personal">
+            <i class="bi bi-file-earmark-x fs-1"></i>
+            <p>No hay documentos agregados</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- PROCEDIMIENTOS DE INSTALACION Y PRUEBAS -->
+      <div class="document-list">
+        <h2 class="fs-4 mb-3">PROCEDIMIENTOS DE INSTALACION Y PRUEBAS</h2>
+        
+        <div id="documentsList-instalacion" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <!-- Los documentos se cargarán aquí dinámicamente -->
+          <div class="col text-center text-muted py-5" id="emptyMessage-instalacion">
+            <i class="bi bi-file-earmark-x fs-1"></i>
+            <p>No hay documentos agregados</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- PROCEDIMIENTOS PARA ASEGURAR LA CALIDAD -->
+      <div class="document-list">
+        <h2 class="fs-4 mb-3">PROCEDIMIENTOS PARA ASEGURAR LA CALIDAD</h2>
+        
+        <div id="documentsList-calidad" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <!-- Los documentos se cargarán aquí dinámicamente -->
+          <div class="col text-center text-muted py-5" id="emptyMessage-calidad">
+            <i class="bi bi-file-earmark-x fs-1"></i>
+            <p>No hay documentos agregados</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- REGLAMENTO DE SEGURIDAD -->
+      <div class="document-list">
+        <h2 class="fs-4 mb-3">REGLAMENTO DE SEGURIDAD</h2>
+        
+        <div id="documentsList-reglamento" class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+          <!-- Los documentos se cargarán aquí dinámicamente -->
+          <div class="col text-center text-muted py-5" id="emptyMessage-reglamento">
             <i class="bi bi-file-earmark-x fs-1"></i>
             <p>No hay documentos agregados</p>
           </div>
@@ -540,13 +633,189 @@
     const DOCUMENTOS_PREDEFINIDOS =   [
       {
         "id": "1744039293953",
-        "name": "pastrana",
-        "url": "https://drive.google.com/file/d/1meAlSF4EAtG21zP38nCvyABJvT_Oi9F6/preview?usp=sharing"
+        "name": "CV ISI",
+        "url": "https://drive.google.com/file/d/1meAlSF4EAtG21zP38nCvyABJvT_Oi9F6/preview?usp=sharing",
+        "section": "general"
       },
       {
-        "id": "1744039611343",
-        "name": "saul",
-        "url": "https://drive.google.com/file/d/1MlpTZQuOeGnqkqBMPjISCJkpCE6gfsGf/preview?usp=sharing"
+        "id": "1744902928773",
+        "name": "FOR-PRY-186 CHECK LIST INSPECCION DE EQUIPOS PARA TRABAJOS EN CALIENTE",
+        "url": "https://drive.google.com/file/d/1krpkI_uh9e6K95Bd3VYsBStCBnnrI8VH/preview?usp=sharing",
+        "section": "checklist"
+      },
+      {
+        "id": "1744903924510",
+        "name": "FOR-PRY-187 CHECK LIST DE TRABAJO EN ALTURAS",
+        "url": "https://drive.google.com/file/d/12IWXFMf4Au0LiWwDY4ZLNK2LC5wzc78A/preview?usp=sharing",
+        "section": "checklist"
+      },
+      {
+        "id": "1744903944009",
+        "name": "FOR-PRY-188 CHECKLIST TRABAJO EN ANDAMIOS",
+        "url": "https://drive.google.com/file/d/1jNp8BXSbgrH9f3dVG2oS-XR58t3YDPix/preview?usp=drive_link",
+        "section": "checklist"
+      },
+      {
+        "id": "1744903981934",
+        "name": "FOR-PRY-189 CHECKLIST EQUIPO DE CORTE",
+        "url": "https://drive.google.com/file/d/1WkNLnzgYU2NIPF5LrQ--QesNXHNiGmKt/preview?usp=sharing",
+        "section": "checklist"
+      },
+      {
+        "id": "1744904004022",
+        "name": "PRO-PRY-190 CHECK LIST SOLDADURA ARCO ELECTRICO",
+        "url": "https://drive.google.com/file/d/1BM6sJO-FEZ1yOwvY5AASZTgmStdtATRx/preview?usp=drive_link",
+        "section": "checklist"
+      },
+      {
+        "id": "1744904028590",
+        "name": "PRO-PRY-191 CHECK LIST ESCALERAS",
+        "url": "https://drive.google.com/file/d/163DinPjItQTb0Bw-a6vK2v8C3b93xb5V/preview?usp=drive_link",
+        "section": "checklist"
+      },
+      {
+        "id": "1744904044667",
+        "name": "PRO-PRY-192 CHECK LIST ESMERIL",
+        "url": "https://drive.google.com/file/d/1WWYscsIt3J4YXuhmJVJuOjbRBio4hloK/preview?usp=drive_link",
+        "section": "checklist"
+      },
+      {
+        "id": "1744904088094",
+        "name": "REPORTE DE ACCIDENTE DE TRABAJO",
+        "url": "https://drive.google.com/file/d/1XlmRLKqG4uVjPscmDp9sfq_W4nNwkqiK/preview?usp=drive_link",
+        "section": "checklist"
+      },
+      {
+        "id": "1744904122136",
+        "name": "REPORTE DE DESVIOS",
+        "url": "https://drive.google.com/file/d/14NJLYtquy3GadEl1DMebXRAu-FkgUich/preview?usp=drive_link",
+        "section": "checklist"
+      },
+      {
+        "id": "1744904143568",
+        "name": "REPORTE DE INCIDENTES DE TRABAJO",
+        "url": "https://drive.google.com/file/d/18m0pMLgkEnQAxB4BvRucB0MuYRg1tXLV/preview?usp=drive_link",
+        "section": "checklist"
+      },
+      {
+        "id": "1744904293849",
+        "name": "FORMATO DE REQUISICION DE MATERIALES",
+        "url": "https://drive.google.com/file/d/1arvxKePUWa_RkrGPtQICZSDHDqkFPuew/preview?usp=drive_link",
+        "section": "materiales"
+      },
+      {
+        "id": "1744904413175",
+        "name": "CONTROL DE SALUD",
+        "url": "https://drive.google.com/file/d/1z-66yX37kmAK-NNrfX5Dv6Vq9NtqtWZK/preview?usp=sharing",
+        "section": "personal"
+      },
+      {
+        "id": "1744904437350",
+        "name": "CREDENCIALES PERSONAL OBRA",
+        "url": "https://drive.google.com/file/d/1Umrc9effHfGp3PeqH_791VDYPNgllxYp/preview?usp=drive_link",
+        "section": "personal"
+      },
+      {
+        "id": "1744904452308",
+        "name": "PE-ISI-PCI-05 PREVENCION Y PROTECCION CONTRA INCENDIO",
+        "url": "https://drive.google.com/file/d/1uYQanyvUg4q5GQQwT8itw0u7GKxxATEs/preview?usp=drive_link",
+        "section": "personal"
+      },
+      {
+        "id": "1744904574767",
+        "name": "PRO-PRY- 125 PROCEDIMIENTO DE REPARACION DE TANQUE DE ALMACENAMIENTO SPCI",
+        "url": "https://drive.google.com/file/d/1RxfgOFJmYvy-1rq_CUG5XkLfIGODNzA2/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904600702",
+        "name": "PRO-PRY-20 PROCEDIMIENTO DE CONSTRUCCION DE REDES SPCI",
+        "url": "https://drive.google.com/file/d/1NdOpmcMUtpWAPIufpeS0boJE8n70o0Ye/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904619795",
+        "name": "PRO-PRY-21 PROCEDIMIENTO DE MONTAJE E INSTALACION SPCI",
+        "url": "https://drive.google.com/file/d/1_ENE_KeCkfSJpi1Y8jaaKyQnpP0KecMj/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904712041",
+        "name": "PRO-PRY-72X PROCEDIMIENTO DE PRUEBAS A DETECTORES EN AREAS ESPECIALES",
+        "url": "https://drive.google.com/file/d/1GjeSzX4Fzvg2UWziFEUj5Oclfcl_R5Xp/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904739110",
+        "name": "PRO-PRY-91 PROCEDIMIENTO DE CALIDAD PARA SOLDADURAS SPCI",
+        "url": "https://drive.google.com/file/d/1UUV7M_CGJAQv8olX5t6QCHQ78EHDWWOg/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904759758",
+        "name": "PRO-PRY-91 PROCEDIMIENTO DE PRUEBAS A REDES SPCI",
+        "url": "https://drive.google.com/file/d/1LLMMphm-3o8xuL7NmxOiIfeJA7fUJk5M/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904781427",
+        "name": "PRO-PRY-91 PROCEDIMIENTO DE SOLDADURAS PARA REDES SPCI",
+        "url": "https://drive.google.com/file/d/1Fjf5EL7reitaAWGmaWRoUEu4STD3kF1O/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904801205",
+        "name": "PRO-PRY-92X PROCEDIMIENTO DE INSTALACION DE RED SPCI",
+        "url": "https://drive.google.com/file/d/1MxL1Kiiam1LZUKk00WdVOS80RZZF7lFj/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904824633",
+        "name": "PRO-PRY-92X PROCEDIMIENTO DE INVESTIGACION DE RED HUMEDA SPCI",
+        "url": "https://drive.google.com/file/d/1Nb6L9TqS0Rb5L4-IFCCx9BgrrkxmXFJU/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904841800",
+        "name": "PROCEDIMIENTO DE INTERCONEXION A RED EXISTENTE",
+        "url": "https://drive.google.com/file/d/1GVCtYwnUGnU7umAKZ_xPUSj0RVVbWrQm/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744904862109",
+        "name": "PROCEDIMIENTO DE REUBICACION DE MANGUERAS EN UNA RED EXISTENTE SPCI",
+        "url": "https://drive.google.com/file/d/1cWyetPU3C9mLfkI6hluQCABYaN4Svc7p/preview?usp=drive_link",
+        "section": "instalacion"
+      },
+      {
+        "id": "1744905454496",
+        "name": "PRO-PRY-91 PROCEDIMIENTO DE CALIDAD PARA SOLDADURAS SPCI",
+        "url": "https://drive.google.com/file/d/1oHQstTnYjutO0VceKuQEdoniMzQZuk7L/preview?usp=drive_link",
+        "section": "calidad"
+      },
+      {
+        "id": "1744905494670",
+        "name": "PRO-PRY-92X PROCEDIMIENTO DE INSTALACION DE RED SPCI",
+        "url": "https://drive.google.com/file/d/1hx32h0uikXB2UA5SQHtTQXQtL7Laz1fo/preview?usp=drive_link",
+        "section": "calidad"
+      },
+      {
+        "id": "1744905515750",
+        "name": "PRO-PRY-92X PROCEDIMIENTO DE INVESTIGACION DE RED HUMEDA SPCI",
+        "url": "https://drive.google.com/file/d/13vjEkAmJzkYGKjxqI2_PozVs_7K369SG/preview?usp=drive_link",
+        "section": "calidad"
+      },
+      {
+        "id": "1744905600482",
+        "name": "INS-GES-175 INSTRUCCION DE TRABAJO SEGURO",
+        "url": "https://drive.google.com/file/d/12NlyNRtKr7HV8prRCQ4f0om4PptZ05P8/preview?usp=drive_link",
+        "section": "reglamento"
+      },
+      {
+        "id": "1744905644758",
+        "name": "PRO-PRY-91X REGLAMENTO DE SEGURIDAD",
+        "url": "https://drive.google.com/file/d/1L_Dw1sKczz8OnsDTV3cLYzju5VP7uglg/preview?usp=drive_link",
+        "section": "reglamento"
       }
     ];
     
@@ -602,6 +871,7 @@
       const documentId = document.getElementById('documentId');
       const documentName = document.getElementById('documentName');
       const documentUrl = document.getElementById('documentUrl');
+      const sectionSelect = document.getElementById('sectionSelect');
       const saveButton = document.getElementById('saveButton');
       const cancelButton = document.getElementById('cancelButton');
       const formTitle = document.getElementById('formTitle');
@@ -700,65 +970,108 @@
       
       // Funciones
       function renderDocuments() {
-        // Limpiar la lista
+        // Limpiar la lista principal
         while (documentsList.firstChild) {
           documentsList.removeChild(documentsList.firstChild);
         }
         
-        // Mostrar mensaje si no hay documentos
-        if (documents.length === 0) {
+        // Filtrar documentos de la sección general
+        const generalDocuments = documents.filter(doc => !doc.section || doc.section === 'general');
+        
+        // Mostrar mensaje si no hay documentos en la sección general
+        if (generalDocuments.length === 0) {
           documentsList.appendChild(emptyMessage);
+        } else {
+          // Ocultar mensaje de vacío
+          if (emptyMessage.parentNode === documentsList) {
+            documentsList.removeChild(emptyMessage);
+          }
+          
+          // Renderizar cada documento de la sección general
+          generalDocuments.forEach(doc => {
+            renderDocumentCard(doc, documentsList);
+          });
+        }
+        
+        // Renderizar documentos para las otras secciones
+        renderSectionDocuments('checklist');
+        renderSectionDocuments('materiales');
+        renderSectionDocuments('personal');
+        renderSectionDocuments('instalacion');
+        renderSectionDocuments('calidad');
+        renderSectionDocuments('reglamento');
+      }
+      
+      // Función para renderizar documentos en una sección específica
+      function renderSectionDocuments(section) {
+        const sectionList = document.getElementById(`documentsList-${section}`);
+        const sectionEmptyMessage = document.getElementById(`emptyMessage-${section}`);
+        
+        // Si no existe la sección, salir
+        if (!sectionList) return;
+        
+        // Limpiar la lista
+        while (sectionList.firstChild) {
+          sectionList.removeChild(sectionList.firstChild);
+        }
+        
+        // Filtrar documentos de esta sección
+        const sectionDocuments = documents.filter(doc => doc.section === section);
+        
+        // Mostrar mensaje si no hay documentos
+        if (sectionDocuments.length === 0) {
+          sectionList.appendChild(sectionEmptyMessage);
           return;
         }
         
-        // Ocultar mensaje de vacío
-        if (emptyMessage.parentNode === documentsList) {
-          documentsList.removeChild(emptyMessage);
-        }
+        // Renderizar cada documento de esta sección
+        sectionDocuments.forEach(doc => {
+          renderDocumentCard(doc, sectionList);
+        });
+      }
+      
+      // Función para renderizar una tarjeta de documento
+      function renderDocumentCard(doc, container) {
+        const col = document.createElement('div');
+        col.className = 'col';
         
-        // Renderizar cada documento
-        documents.forEach(doc => {
-          const col = document.createElement('div');
-          col.className = 'col';
-          
-          col.innerHTML = `
-            <div class="card document-card h-100">
-              <div class="card-body">
-                <h5 class="card-title">${doc.name}</h5>
-                <p class="card-text text-truncate text-muted small">${doc.url}</p>
-                <div class="document-actions mt-3">
-                  <button class="btn btn-primary view-document" data-id="${doc.id}">
-                    <i class="bi bi-eye me-1"></i> Ver documento
+        col.innerHTML = `
+          <div class="card document-card h-100">
+            <div class="card-body">
+              <h5 class="card-title">${doc.name}</h5>
+              <p class="card-text text-truncate text-muted small">${doc.url}</p>
+              <div class="document-actions mt-3">
+                <button class="btn btn-primary view-document" data-id="${doc.id}">
+                  <i class="bi bi-eye me-1"></i> Ver documento
+                </button>
+                ${isAdminMode ? `
+                <div class="btn-group float-end">
+                  <button class="btn btn-outline-secondary btn-sm edit-document" data-id="${doc.id}">
+                    <i class="bi bi-pencil"></i>
                   </button>
-                  ${isAdminMode ? `
-                  <div class="btn-group float-end">
-                    <button class="btn btn-outline-secondary btn-sm edit-document" data-id="${doc.id}">
-                      <i class="bi bi-pencil"></i>
-                    </button>
-                    <button class="btn btn-outline-danger btn-sm delete-document" data-id="${doc.id}">
-                      <i class="bi bi-trash"></i>
-                    </button>
-                  </div>
-                  ` : ''}
+                  <button class="btn btn-outline-danger btn-sm delete-document" data-id="${doc.id}">
+                    <i class="bi bi-trash"></i>
+                  </button>
                 </div>
+                ` : ''}
               </div>
             </div>
-          `;
+          </div>
+        `;
+        
+        container.appendChild(col);
+        
+        // Agregar event listeners a los botones
+        const viewBtn = col.querySelector('.view-document');
+        viewBtn.addEventListener('click', () => viewDocument(doc.id));
+        
+        if (isAdminMode) {
+          const editBtn = col.querySelector('.edit-document');
+          const deleteBtn = col.querySelector('.delete-document');
           
-          documentsList.appendChild(col);
-          
-          // Agregar event listeners a los botones
-          const viewBtn = col.querySelector('.view-document');
-          viewBtn.addEventListener('click', () => viewDocument(doc.id));
-          
-          if (isAdminMode) {
-            const editBtn = col.querySelector('.edit-document');
-            const deleteBtn = col.querySelector('.delete-document');
-            
-            editBtn.addEventListener('click', () => editDocument(doc.id));
-            deleteBtn.addEventListener('click', () => deleteDocument(doc.id));
-          }
-        });
+          editBtn.addEventListener('click', () => editDocument(doc.id));
+          deleteBtn.addEventListener('click', () => deleteDocument(doc.id));
+        }
       }
       
       function handleFormSubmit(e) {
@@ -771,6 +1084,7 @@
         
         const name = documentName.value.trim();
         const url = documentUrl.value.trim();
+        const section = sectionSelect.value;
         
         if (!name || !url) {
           alert('Por favor, completa todos los campos');
@@ -788,14 +1102,15 @@
           const index = documents.findIndex(doc => doc.id === id);
           
           if (index !== -1) {
-            documents[index] = { id, name, url: getPreviewUrl(url) };
+            documents[index] = { id, name, url: getPreviewUrl(url), section };
           }
         } else {
           // Agregar nuevo documento
           const newDoc = {
             id: Date.now().toString(),
             name,
-            url: getPreviewUrl(url)
+            url: getPreviewUrl(url),
+            section
           };
           
           documents.push(newDoc);
@@ -834,6 +1149,7 @@
         documentId.value = doc.id;
         documentName.value = doc.name;
         documentUrl.value = doc.url;
+        sectionSelect.value = doc.section || 'general';
         
         // Actualizar UI
         formTitle.textContent = 'Editar documento';
@@ -866,6 +1182,7 @@
         isEditing = false;
         documentForm.reset();
         documentId.value = '';
+        sectionSelect.value = 'general';
         
         // Actualizar UI
         formTitle.textContent = 'Agregar nuevo documento';
