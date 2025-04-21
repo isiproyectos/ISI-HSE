@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Página</title>
-  <!-- Bootstrap CSS -->
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía de EPP para Naves Industriales</title>
+<!-- Bootstrap CSS -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 <!-- Bootstrap Icons -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
-<!-- Google Fonts para la firma - Usando una fuente elegante pero sutil -->
+<!-- Google Fonts para la firma -->
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400&display=swap" rel="stylesheet">
 <style>
   /* Estilos base */
@@ -46,7 +46,7 @@
     min-height: 100vh; /* Altura mínima para ocupar toda la pantalla */
   }
   
-  /* Encabezado con imágenes más separadas */
+  /* Encabezado con imágenes más separadas - CORREGIDO */
   .header {
     height: 245px;
     border-bottom: 1px solid #dee2e6;
@@ -55,9 +55,10 @@
     justify-content: space-between;
     padding: 0 20px;
     overflow: hidden;
+    background-color: #ffffff; /* Aseguramos que tenga fondo blanco */
   }
   
-  /* Contenedor del logo alineado a la izquierda */
+  /* Contenedor del logo alineado a la izquierda - CORREGIDO */
   .logo-container {
     width: 45%;
     display: flex;
@@ -65,31 +66,33 @@
     justify-content: flex-start;
     overflow: hidden;
     margin-left: 0;
+    height: 100%; /* Aseguramos que ocupe toda la altura del header */
   }
   
-  /* Contenedor de usuario alineado a la derecha */
+  /* Contenedor de usuario alineado a la derecha - CORREGIDO */
   .user-container {
     width: 45%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
+    height: 100%; /* Aseguramos que ocupe toda la altura del header */
   }
   
-  /* Imágenes más grandes sin recortes */
+  /* Imágenes más grandes sin recortes - CORREGIDO */
   .logo-img {
     height: 250px;  /* Ajustamos la altura */
     width: 300px;   /* Ajustamos el ancho */
     object-fit: contain; /* Asegura que la imagen no se recorte */
-    transform: scale(1); /* Sin escalado adicional */
     transform-origin: left center;
+    max-width: 100%; /* Evita que la imagen se salga del contenedor */
   }
 
   .user-img {
     height: 250px;  /* Ajustamos la altura */
     width: 255px;   /* Ajustamos el ancho */
     object-fit: contain; /* Asegura que la imagen no se recorte */
-    transform: scale(1); /* Sin escalado adicional */
     transform-origin: right center;
+    max-width: 100%; /* Evita que la imagen se salga del contenedor */
   }
   
   .nav-link {
@@ -224,7 +227,7 @@
     
     .logo-img, .user-img {
       height: 120px;
-      width: 120px;
+      width: auto;
     }
     
     /* Ajuste para el botón de menú en móvil */
@@ -236,232 +239,1024 @@
     }
     
     .signature-container {
-  width: 100%;
-  padding: 12px 25px;
-  text-align: center;
-  border-top: 1px solid #eaeaea;
-  background-color: transparent;
-  position: fixed; /* Cambiado a posición fija */
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  margin-top: 20px; /* Espacio mínimo sobre el footer */
-}
+      padding: 10px;
+    }
     
     .signature-divider {
       width: 30px;
     }
   }
   
-  /* Asegurar que todas las imágenes de las tarjetas tengan el mismo tamaño */
-  .card-img-top {
-    height: 200px; /* Ajusta la altura que deseas */
-    width: 100%;   /* Hace que las imágenes ocupen todo el ancho del contenedor */
-    object-fit: cover; /* Asegura que la imagen cubra el área sin distorsionar */
-  }
-  
-  /* Estilos para el gestor de documentos */
-  .document-card {
-    transition: all 0.2s ease;
+  /* Estilos específicos para la guía de EPP */
+  .epp-card {
+    border: 1px solid #dee2e6;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
     height: 100%;
-    display: flex;
-    flex-direction: column;
+    background-color: #fff;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
   }
   
-  .document-card:hover {
+  .epp-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(0,0,0,0.1);
   }
   
-  .document-actions {
-    margin-top: auto;
+  .epp-card-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid #dee2e6;
   }
   
-  .document-manager {
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    margin-bottom: 2rem;
-    padding: 1.5rem;
+  .epp-card-icon {
+    font-size: 2.5rem;
+    margin-right: 1rem;
+    color: #0d6efd;
   }
   
-  .document-list {
-    background-color: #fff;
-    border-radius: 0.5rem;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    padding: 1.5rem;
+  .epp-card-title {
+    font-weight: 600;
+    margin: 0;
   }
   
-  /* Estilos para el panel de administración */
-  .admin-panel {
-    background-color: #f8f9fa;
-    border: 2px dashed #dc3545;
-    padding: 15px;
-    margin-bottom: 20px;
-    border-radius: 5px;
+  .epp-card-body {
+    margin-bottom: 1rem;
   }
-   
-  .admin-badge {
-    background-color: #dc3545;
-    color: white;
-    padding: 3px 8px;
-    border-radius: 10px;
-    font-size: 12px;
-    margin-left: 10px;
+  
+  .epp-card-description {
+    margin-bottom: 1rem;
   }
-   
-  .code-output {
+  
+  .epp-card-image {
     width: 100%;
     height: 200px;
-    font-family: monospace;
-    padding: 10px;
-    margin-top: 10px;
-    white-space: pre;
-    overflow: auto;
+    object-fit: contain;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    background-color: #f8f9fa;
+    padding: 0.5rem;
+  }
+  
+  .epp-card-features {
+    margin-bottom: 1rem;
+  }
+  
+  .epp-card-feature {
+    display: flex;
+    align-items: flex-start;
+    margin-bottom: 0.5rem;
+  }
+  
+  .epp-card-feature-icon {
+    color: #198754;
+    margin-right: 0.5rem;
+    margin-top: 0.25rem;
+    flex-shrink: 0;
+  }
+  
+  .epp-card-standards {
+    font-size: 0.875rem;
+    color: #6c757d;
+    margin-bottom: 1rem;
+  }
+  
+  .epp-card-footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    border-top: 1px solid #dee2e6;
+  }
+  
+  .epp-card-status {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+  }
+  
+  .status-obligatorio {
+    background-color: #dc3545;
+    color: #fff;
+  }
+  
+  .status-recomendado {
+    background-color: #ffc107;
+    color: #212529;
+  }
+  
+  .status-situacional {
+    background-color: #0dcaf0;
+    color: #212529;
+  }
+  
+  .epp-section {
+    margin-bottom: 3rem;
+  }
+  
+  .epp-section-title {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #0d6efd;
+    color: #0d6efd;
+  }
+  
+  .epp-section-description {
+    margin-bottom: 1.5rem;
+  }
+  
+  .print-section {
+    display: flex;
+    justify-content: flex-end;
+    margin-bottom: 2rem;
+  }
+  
+  .area-tag {
+    display: inline-block;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin-right: 0.5rem;
+    margin-bottom: 0.5rem;
+    background-color: #e9ecef;
+    color: #495057;
+  }
+  
+  .epp-overview {
+    background-color: #f8f9fa;
+    border-radius: 0.5rem;
+    padding: 1.5rem;
+    margin-bottom: 2rem;
+    border-left: 5px solid #0d6efd;
+  }
+  
+  .epp-overview-title {
+    color: #0d6efd;
+    margin-bottom: 1rem;
+  }
+  
+  .epp-overview-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 0.5rem;
+  }
+  
+  .epp-overview-icon {
+    font-size: 1.25rem;
+    margin-right: 0.5rem;
+    color: #0d6efd;
+  }
+  
+  .epp-table {
+    width: 100%;
+    margin-bottom: 2rem;
+  }
+  
+  .epp-table th {
+    background-color: #0d6efd;
+    color: #fff;
+    font-weight: 600;
+    text-align: center;
+    vertical-align: middle;
+  }
+  
+  .epp-table td {
+    vertical-align: middle;
+  }
+  
+  .epp-table-icon {
+    font-size: 1.5rem;
+    color: #0d6efd;
+  }
+  
+  .epp-table-status {
+    font-weight: 600;
+    padding: 0.25rem 0.5rem;
+    border-radius: 0.25rem;
+    display: inline-block;
+  }
+  
+  @media print {
+    body {
+      background-color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    
+    .sidebar, .header, .signature-container, .print-section {
+      display: none !important;
+    }
+    
+    .content {
+      margin: 0;
+      width: 100%;
+    }
+    
+    .main-content {
+      padding: 0;
+    }
+    
+    .epp-card {
+      break-inside: avoid;
+      box-shadow: none;
+    }
   }
 </style>
 </head>
 <body>
-  <!-- Sidebar -->
-  <nav id="sidebar" class="sidebar">
-    <div class="p-3 border-bottom">
-      <h3 class="fs-5 fw-semibold">HSE Proyectos</h3>
-    </div>
-    
-    <div class="p-2">
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a href="../index.html" class="nav-link">
-            <i class="bi bi-house-door"></i> Inicio
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/dash.html" class="nav-link">
-            <i class="bi bi-grid"></i> Dashboard
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/usuarios.html" class="nav-link">
-            <i class="bi bi-people"></i> Usuarios
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/documentos.html" class="nav-link ">
-            <i class="bi bi-file-text"></i> Documentos
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link active">
-            <i class="bi bi-calendar"></i> Calendario
-          </a>
-        </li>
-        <li class="nav-item">
-          <a href="../templates/estadísticas.html" class="nav-link ">
-            <i class="bi bi-bar-chart"></i> Estadísticas
-          </a>
-        </li>
-      </ul>
-      
-      <div class="sidebar-divider"></div>
-      
-      <ul class="nav flex-column">
-        <li class="nav-item">
-          <a href="../templates/nosotros.html" class="nav-link">
-            <i class="bi bi-question-circle"></i> ¿Quienes Somos?
-          </a>
-        </li>
-      </ul>
-    </div>
-  </nav>
-
-  <!-- Overlay for mobile -->
-  <div id="overlay" class="overlay"></div>
-
-  <!-- Page content -->
-  <div id="content" class="content">
-    <!-- Header with images -->
-    <header class="header">
-      <!-- Logo container -->
-      <div class="logo-container">
-        <!-- Mobile sidebar toggle -->
-        <button id="sidebarToggle" class="btn btn-outline-secondary me-2 d-md-none">
-          <i class="bi bi-list"></i>
-        </button>
-        
-        <!-- Top-left image -->
-        <img src="../static/ISI.png" alt="Logo" class="logo-img">
-      </div>
-      
-      <!-- User image container -->
-      <div class="user-container">
-        <!-- Top-right image -->
-        <img src="../static/proyectos logo2.png" alt="Usuario" class="user-img">
-      </div>
-    </header>
-
-    <!-- Main content -->
-    <div class="main-content">
-      <h1 class="mb-4">Calendario</h1>
-
-
-    </div>
-    
-
-    <!-- Firma personalizada elegante pero discreta -->
-    <footer class="signature-container">
-      <div class="signature-content">
-        <span class="signature-divider"></span>
-        <span class="signature-text">Diseñado por <span class="signature-name">Ing.Saúl Silva Rodriguez</span> © <span id="current-year"></span></span>
-        <div class="signature-social">
-          <a href="https://www.linkedin.com/in/saul-silva-rodr%C3%ADguez-43b241274?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
-          <a href="https://github.com/isiproyectos" title="GitHub"><i class="bi bi-github"></i></a>
-          <a href="mailto:edreirdz1224@gmail.com" title="Correo electrónico"><i class="bi bi-envelope-fill"></i></a>
-        </div>
-        <span class="signature-divider"></span>
-      </div>
-    </footer>
+<!-- Sidebar -->
+<nav id="sidebar" class="sidebar">
+  <div class="p-3 border-bottom">
+    <h3 class="fs-5 fw-semibold">HSE Proyectos</h3>
   </div>
-        <!-- Bootstrap Bundle with Popper -->
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
   
-  <!-- Custom JavaScript -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const sidebar = document.getElementById('sidebar');
-      const content = document.getElementById('content');
-      const overlay = document.getElementById('overlay');
-      const sidebarToggle = document.getElementById('sidebarToggle');
+  <div class="p-2">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a href="../index.html" class="nav-link">
+          <i class="bi bi-house-door"></i> Inicio
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/dash.html" class="nav-link">
+          <i class="bi bi-grid"></i> Dashboard
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/usuarios.html" class="nav-link">
+          <i class="bi bi-people"></i> Usuarios
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/documentos.html" class="nav-link">
+          <i class="bi bi-file-text"></i> Documentos
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="#" class="nav-link active">
+          <i class="bi bi-shield-check"></i> Guía EPP
+        </a>
+      </li>
+      <li class="nav-item">
+        <a href="../templates/estadísticas.html" class="nav-link">
+          <i class="bi bi-bar-chart"></i> Estadísticas
+        </a>
+      </li>
+    </ul>
+    
+    <div class="sidebar-divider"></div>
+    
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a href="../templates/nosotros.html" class="nav-link">
+          <i class="bi bi-question-circle"></i> ¿Quienes Somos?
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+<!-- Overlay for mobile -->
+<div id="overlay" class="overlay"></div>
+
+<!-- Page content -->
+<div id="content" class="content">
+  <!-- Header with images - CORREGIDO -->
+  <header class="header">
+    <!-- Logo container -->
+    <div class="logo-container">
+      <!-- Mobile sidebar toggle -->
+      <button id="sidebarToggle" class="btn btn-outline-secondary me-2 d-md-none">
+        <i class="bi bi-list"></i>
+      </button>
       
-      // Toggle sidebar on mobile
-      sidebarToggle.addEventListener('click', function() {
-        sidebar.classList.toggle('active');
-        content.classList.toggle('active');
-        overlay.classList.toggle('active');
-      });
+      <!-- Top-left image - CORREGIDO: Cambiamos la ruta de la imagen -->
+      <img src="../static/ISI.png" alt="Logo" class="logo-img">
+    </div>
+    
+    <!-- User image container -->
+    <div class="user-container">
+      <!-- Top-right image - CORREGIDO: Cambiamos la ruta de la imagen -->
+      <img src="../static/proyectos logo2.png" alt="Usuario" class="user-img">
+    </div>
+  </header>
+
+  <!-- Main content -->
+  <div class="main-content">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <h1>Guía de EPP para Naves Industriales</h1>
+      <div class="print-section">
+        <button class="btn btn-outline-primary" id="printBtn">
+          <i class="bi bi-printer me-1"></i>Imprimir guía
+        </button>
+      </div>
+    </div>
+    
+    <div class="epp-overview">
+      <h4 class="epp-overview-title">Equipo de Protección Personal Básico en Naves Industriales</h4>
+      <p>Todo trabajador que ingrese o labore en una nave industrial debe utilizar como mínimo el siguiente equipo de protección personal básico:</p>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="epp-overview-item">
+            <i class="bi bi-shield-check epp-overview-icon"></i>
+            <span><strong>Casco de seguridad</strong> - Protección contra impactos y caída de objetos</span>
+          </div>
+          <div class="epp-overview-item">
+            <i class="bi bi-shield-check epp-overview-icon"></i>
+            <span><strong>Calzado de seguridad</strong> - Con puntera reforzada y suela antideslizante</span>
+          </div>
+          <div class="epp-overview-item">
+            <i class="bi bi-shield-check epp-overview-icon"></i>
+            <span><strong>Gafas de seguridad</strong> - Protección ocular contra partículas y salpicaduras</span>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="epp-overview-item">
+            <i class="bi bi-shield-check epp-overview-icon"></i>
+            <span><strong>Ropa de trabajo</strong> - Adecuada para la actividad industrial</span>
+          </div>
+          <div class="epp-overview-item">
+            <i class="bi bi-shield-check epp-overview-icon"></i>
+            <span><strong>Chaleco de alta visibilidad</strong> - Para ser fácilmente identificable</span>
+          </div>
+          <div class="epp-overview-item">
+            <i class="bi bi-shield-check epp-overview-icon"></i>
+            <span><strong>Protección auditiva</strong> - En áreas con niveles de ruido elevados</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="table-responsive mb-5">
+      <table class="table table-bordered epp-table">
+        <thead>
+          <tr>
+            <th>Equipo</th>
+            <th>Descripción</th>
+            <th>Obligatorio en</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-shield-shaded epp-table-icon"></i>
+              <div>Casco de seguridad</div>
+            </td>
+            <td>Protege la cabeza contra impactos, golpes y caída de objetos</td>
+            <td>Toda la nave industrial</td>
+            <td class="text-center"><span class="epp-table-status status-obligatorio">Obligatorio</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-eyeglasses epp-table-icon"></i>
+              <div>Gafas de seguridad</div>
+            </td>
+            <td>Protegen los ojos contra partículas, polvo y salpicaduras</td>
+            <td>Toda la nave industrial</td>
+            <td class="text-center"><span class="epp-table-status status-obligatorio">Obligatorio</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-boot epp-table-icon"></i>
+              <div>Calzado de seguridad</div>
+            </td>
+            <td>Protege los pies contra impactos, compresión y perforación</td>
+            <td>Toda la nave industrial</td>
+            <td class="text-center"><span class="epp-table-status status-obligatorio">Obligatorio</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-ear epp-table-icon"></i>
+              <div>Protección auditiva</div>
+            </td>
+            <td>Protege los oídos contra niveles elevados de ruido</td>
+            <td>Áreas con ruido >85 dB</td>
+            <td class="text-center"><span class="epp-table-status status-obligatorio">Obligatorio</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-person-vcard epp-table-icon"></i>
+              <div>Chaleco de alta visibilidad</div>
+            </td>
+            <td>Permite ser fácilmente identificable en la nave industrial</td>
+            <td>Áreas con tráfico de vehículos</td>
+            <td class="text-center"><span class="epp-table-status status-obligatorio">Obligatorio</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-hand-index-thumb epp-table-icon"></i>
+              <div>Guantes de protección</div>
+            </td>
+            <td>Protegen las manos contra cortes, abrasiones y sustancias químicas</td>
+            <td>Manipulación de materiales</td>
+            <td class="text-center"><span class="epp-table-status status-obligatorio">Obligatorio</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-mask epp-table-icon"></i>
+              <div>Protección respiratoria</div>
+            </td>
+            <td>Protege contra polvos, gases y vapores</td>
+            <td>Áreas con contaminantes en el aire</td>
+            <td class="text-center"><span class="epp-table-status status-situacional">Situacional</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-shield epp-table-icon"></i>
+              <div>Pantalla facial</div>
+            </td>
+            <td>Protege toda la cara contra salpicaduras y proyecciones</td>
+            <td>Trabajos con riesgo de proyecciones</td>
+            <td class="text-center"><span class="epp-table-status status-situacional">Situacional</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-person-lines-fill epp-table-icon"></i>
+              <div>Arnés de seguridad</div>
+            </td>
+            <td>Protege contra caídas de altura</td>
+            <td>Trabajos a más de 1.8 metros de altura</td>
+            <td class="text-center"><span class="epp-table-status status-situacional">Situacional</span></td>
+          </tr>
+          <tr>
+            <td class="text-center">
+              <i class="bi bi-person epp-table-icon"></i>
+              <div>Ropa de protección química</div>
+            </td>
+            <td>Protege el cuerpo contra sustancias químicas</td>
+            <td>Manipulación de productos químicos</td>
+            <td class="text-center"><span class="epp-table-status status-situacional">Situacional</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+    <!-- Sección de EPP Obligatorio -->
+    <div class="epp-section">
+      <h2 class="epp-section-title">EPP Obligatorio en Naves Industriales</h2>
+      <p class="epp-section-description">Este equipo debe ser utilizado por todos los trabajadores y visitantes que ingresen a la nave industrial, sin excepción.</p>
       
-      // Close sidebar when clicking on overlay
-      overlay.addEventListener('click', function() {
+      <div class="row">
+        <!-- Casco de seguridad -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-shield-shaded epp-card-icon"></i>
+              <h4 class="epp-card-title">Casco de Seguridad</h4>
+            </div>
+            <div class="epp-card-body">
+              <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
+              <img src="../static/casco.webp" alt="Casco de seguridad" class="epp-card-image">
+              <div class="epp-card-description">
+                <p>Protege la cabeza contra impactos, golpes, caída de objetos y contacto con conductores eléctricos.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Tipo recomendado:</strong> Clase E (dieléctrico hasta 20,000 voltios)
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Características:</strong> Ajustable, con suspensión de 4 o 6 puntos, barboquejo para trabajos en altura
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Color:</strong> Según área o función (blanco: visitantes, amarillo: operarios, rojo: brigadistas, etc.)
+                  </div>
+                </div>
+              </div>
+              <div class="epp-card-standards">
+                <strong>Normas aplicables:</strong> ANSI/ISEA Z89.1, NOM-115-STPS, EN 397
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <span class="epp-card-status status-obligatorio">Obligatorio</span>
+              <span>Vida útil: 3-5 años (revisar mensualmente)</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Calzado de seguridad -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-boot epp-card-icon"></i>
+              <h4 class="epp-card-title">Calzado de Seguridad</h4>
+            </div>
+            <div class="epp-card-body">
+              <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
+              <img src="../static/calzado.webp" alt="Calzado de seguridad" class="epp-card-image">
+              <div class="epp-card-description">
+                <p>Protege los pies contra impactos, compresión, perforación, riesgos eléctricos y resbalones.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Tipo recomendado:</strong> Bota con puntera de acero o composite, suela antideslizante y resistente a hidrocarburos
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Características:</strong> Dieléctrico, resistente a la perforación, absorción de impactos en el talón
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Áreas específicas:</strong> En zonas húmedas o con productos químicos, usar botas impermeables
+                  </div>
+                </div>
+              </div>
+              <div class="epp-card-standards">
+                <strong>Normas aplicables:</strong> ASTM F2413, NOM-113-STPS, EN ISO 20345
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <span class="epp-card-status status-obligatorio">Obligatorio</span>
+              <span>Vida útil: 1 año o hasta que presente daños</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Gafas de seguridad -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-eyeglasses epp-card-icon"></i>
+              <h4 class="epp-card-title">Gafas de Seguridad</h4>
+            </div>
+            <div class="epp-card-body">
+              <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
+              <img src="../static/lentes.jpg" alt="Gafas de seguridad" class="epp-card-image">
+              <div class="epp-card-description">
+                <p>Protegen los ojos contra impactos de partículas, polvo, salpicaduras y radiaciones.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Tipo recomendado:</strong> Gafas con protección lateral, resistentes a impactos
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Características:</strong> Tratamiento anti-empañante, anti-rayadura, filtro UV
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Consideraciones:</strong> Deben ser compatibles con otros EPP como cascos y protección respiratoria
+                  </div>
+                </div>
+              </div>
+              <div class="epp-card-standards">
+                <strong>Normas aplicables:</strong> ANSI/ISEA Z87.1, NOM-116-STPS, EN 166
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <span class="epp-card-status status-obligatorio">Obligatorio</span>
+              <span>Vida útil: Reemplazar cuando presenten daños</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Chaleco de alta visibilidad -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-person-vcard epp-card-icon"></i>
+              <h4 class="epp-card-title">Chaleco de Alta Visibilidad</h4>
+            </div>
+            <div class="epp-card-body">
+              <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
+              <img src="../static/chaleco.webp" alt="Chaleco de alta visibilidad" class="epp-card-image">
+              <div class="epp-card-description">
+                <p>Permite ser fácilmente identificable en la nave industrial, especialmente en áreas con tráfico de vehículos.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Tipo recomendado:</strong> Clase 2 con bandas reflectantes de 360°
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Características:</strong> Material fluorescente (naranja o amarillo-verde), bandas reflectantes
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Color:</strong> Puede variar según función o área (visitantes, operarios, supervisores, etc.)
+                  </div>
+                </div>
+              </div>
+              <div class="epp-card-standards">
+                <strong>Normas aplicables:</strong> ANSI/ISEA 107, EN ISO 20471
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <span class="epp-card-status status-obligatorio">Obligatorio</span>
+              <span>Vida útil: Reemplazar cuando pierda visibilidad</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sección de EPP Específico por Área -->
+    <div class="epp-section">
+      <h2 class="epp-section-title">EPP Específico por Área</h2>
+      <p class="epp-section-description">Además del EPP básico obligatorio, se debe utilizar equipo adicional según el área específica de trabajo y los riesgos presentes.</p>
+      
+      <div class="row">
+        <!-- Área de Producción -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-gear epp-card-icon"></i>
+              <h4 class="epp-card-title">Área de Producción</h4>
+            </div>
+            <div class="epp-card-body">
+              <div class="epp-card-description">
+                <p>Zona donde se realizan los procesos de fabricación, ensamblaje y operación de maquinaria.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>EPP Obligatorio:</strong> Casco, calzado de seguridad, gafas, protección auditiva, guantes mecánicos
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Riesgos específicos:</strong> Ruido, proyección de partículas, atrapamientos, cortes
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Consideraciones:</strong> Ropa ajustada sin partes sueltas, prohibido usar joyas o accesorios
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <div>
+                <span class="area-tag">Ruido >85 dB</span>
+                <span class="area-tag">Maquinaria</span>
+                <span class="area-tag">Partículas</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Área de Almacén -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-box-seam epp-card-icon"></i>
+              <h4 class="epp-card-title">Área de Almacén</h4>
+            </div>
+            <div class="epp-card-body">
+              <div class="epp-card-description">
+                <p>Zona de almacenamiento, carga y descarga de materiales y productos.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>EPP Obligatorio:</strong> Casco, calzado de seguridad, guantes de carga, chaleco de alta visibilidad
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Riesgos específicos:</strong> Caída de objetos, atropellos por montacargas, sobreesfuerzos
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Consideraciones:</strong> Faja lumbar para manipulación manual de cargas pesadas
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <div>
+                <span class="area-tag">Montacargas</span>
+                <span class="area-tag">Cargas pesadas</span>
+                <span class="area-tag">Estanterías</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Área de Soldadura -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-fire epp-card-icon"></i>
+              <h4 class="epp-card-title">Área de Soldadura</h4>
+            </div>
+            <div class="epp-card-body">
+              <div class="epp-card-description">
+                <p>Zona donde se realizan trabajos de soldadura y corte de metales.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>EPP Obligatorio:</strong> Careta de soldador, guantes de soldador, mandil de cuero, mangas y polainas
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Riesgos específicos:</strong> Radiaciones UV e IR, proyección de partículas incandescentes, quemaduras
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Consideraciones:</strong> Ropa ignífuga, sin bolsillos ni pliegues donde puedan alojarse chispas
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <div>
+                <span class="area-tag">Radiaciones</span>
+                <span class="area-tag">Chispas</span>
+                <span class="area-tag">Humos metálicos</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Área de Productos Químicos -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-flask epp-card-icon"></i>
+              <h4 class="epp-card-title">Área de Productos Químicos</h4>
+            </div>
+            <div class="epp-card-body">
+              <div class="epp-card-description">
+                <p>Zona donde se manipulan, almacenan o procesan productos químicos.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>EPP Obligatorio:</strong> Guantes químicos, protección respiratoria, pantalla facial, traje de protección química
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Riesgos específicos:</strong> Contacto con sustancias corrosivas, inhalación de vapores tóxicos, salpicaduras
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Consideraciones:</strong> Verificar compatibilidad química de los EPP con las sustancias manipuladas
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <div>
+                <span class="area-tag">Corrosivos</span>
+                <span class="area-tag">Tóxicos</span>
+                <span class="area-tag">Inflamables</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Sección de EPP Situacional -->
+    <div class="epp-section">
+      <h2 class="epp-section-title">EPP para Situaciones Específicas</h2>
+      <p class="epp-section-description">Este equipo debe utilizarse en situaciones o tareas específicas que presentan riesgos particulares.</p>
+      
+      <div class="row">
+        <!-- Trabajos en Altura -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-ladder epp-card-icon"></i>
+              <h4 class="epp-card-title">Trabajos en Altura</h4>
+            </div>
+            <div class="epp-card-body">
+              <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
+              <img src="../static/arnes.jpg" alt="Arnés de seguridad" class="epp-card-image">
+              <div class="epp-card-description">
+                <p>Para trabajos realizados a más de 1.8 metros de altura donde existe riesgo de caída.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>EPP Obligatorio:</strong> Arnés de cuerpo completo, línea de vida con absorbedor de energía, casco con barboquejo
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Características:</strong> Arnés con anillos D dorsales y pectorales, conectores de doble seguro
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Consideraciones:</strong> Inspección visual antes de cada uso, punto de anclaje capaz de soportar 2,268 kg
+                  </div>
+                </div>
+              </div>
+              <div class="epp-card-standards">
+                <strong>Normas aplicables:</strong> ANSI Z359, NOM-009-STPS, EN 361
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <span class="epp-card-status status-situacional">Situacional</span>
+              <span>Inspección: Antes de cada uso</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Espacios Confinados -->
+        <div class="col-md-6 mb-4">
+          <div class="epp-card">
+            <div class="epp-card-header">
+              <i class="bi bi-door-closed epp-card-icon"></i>
+              <h4 class="epp-card-title">Espacios Confinados</h4>
+            </div>
+            <div class="epp-card-body">
+              <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
+              <img src="../static/arnes2.jpg" alt="Equipo para espacios confinados" class="epp-card-image">
+              <div class="epp-card-description">
+                <p>Para trabajos en espacios con aberturas limitadas de entrada y salida, ventilación natural desfavorable y no diseñados para ocupación continua.</p>
+              </div>
+              <div class="epp-card-features">
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>EPP Obligatorio:</strong> Arnés de rescate, equipo de respiración autónomo o línea de aire, detector de gases
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Características:</strong> Arnés con anillos D para rescate, sistema de comunicación, iluminación intrínsecamente segura
+                  </div>
+                </div>
+                <div class="epp-card-feature">
+                  <i class="bi bi-check-circle-fill epp-card-feature-icon"></i>
+                  <div>
+                    <strong>Consideraciones:</strong> Requiere permiso de trabajo, vigilante exterior y plan de rescate
+                  </div>
+                </div>
+              </div>
+              <div class="epp-card-standards">
+                <strong>Normas aplicables:</strong> OSHA 1910.146, NOM-033-STPS, EN 14593
+              </div>
+            </div>
+            <div class="epp-card-footer">
+              <span class="epp-card-status status-situacional">Situacional</span>
+              <span>Requiere capacitación específica</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Recomendaciones Generales -->
+    <div class="epp-section">
+      <h2 class="epp-section-title">Recomendaciones Generales</h2>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">Uso y Mantenimiento del EPP</h5>
+            </div>
+            <div class="card-body">
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">Inspeccionar visualmente el EPP antes de cada uso</li>
+                <li class="list-group-item">No modificar ni alterar ningún elemento del EPP</li>
+                <li class="list-group-item">Limpiar y almacenar adecuadamente según las instrucciones del fabricante</li>
+                <li class="list-group-item">Reemplazar inmediatamente cualquier EPP dañado o deteriorado</li>
+                <li class="list-group-item">Reportar cualquier defecto o problema con el EPP a su supervisor</li>
+                <li class="list-group-item">Utilizar el EPP durante todo el tiempo de exposición al riesgo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="card mb-4">
+            <div class="card-header bg-primary text-white">
+              <h5 class="mb-0">Responsabilidades</h5>
+            </div>
+            <div class="card-body">
+              <h6>Empresa:</h6>
+              <ul>
+                <li>Proporcionar EPP adecuado y certificado</li>
+                <li>Capacitar sobre el uso correcto del EPP</li>
+                <li>Supervisar el cumplimiento de su uso</li>
+              </ul>
+              <h6>Trabajador:</h6>
+              <ul>
+                <li>Utilizar correctamente el EPP proporcionado</li>
+                <li>Cuidar y mantener en buen estado el EPP</li>
+                <li>Informar sobre cualquier defecto o daño</li>
+                <li>Asistir a las capacitaciones sobre EPP</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Firma personalizada elegante pero discreta -->
+  <footer class="signature-container">
+    <div class="signature-content">
+      <span class="signature-divider"></span>
+      <span class="signature-text">Diseñado por <span class="signature-name">Ing.Saúl Silva Rodriguez</span> © <span id="current-year"></span></span>
+      <div class="signature-social">
+        <a href="https://www.linkedin.com/in/saul-silva-rodr%C3%ADguez-43b241274?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=android_app" title="LinkedIn"><i class="bi bi-linkedin"></i></a>
+        <a href="https://github.com/isiproyectos" title="GitHub"><i class="bi bi-github"></i></a>
+        <a href="mailto:edreirdz1224@gmail.com" title="Correo electrónico"><i class="bi bi-envelope-fill"></i></a>
+      </div>
+      <span class="signature-divider"></span>
+    </div>
+  </footer>
+</div>
+
+<!-- Bootstrap Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Custom JavaScript -->
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Sidebar functionality
+    const sidebar = document.getElementById('sidebar');
+    const content = document.getElementById('content');
+    const overlay = document.getElementById('overlay');
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    
+    // Toggle sidebar on mobile
+    sidebarToggle.addEventListener('click', function() {
+      sidebar.classList.toggle('active');
+      content.classList.toggle('active');
+      overlay.classList.toggle('active');
+    });
+    
+    // Close sidebar when clicking on overlay
+    overlay.addEventListener('click', function() {
+      sidebar.classList.remove('active');
+      content.classList.remove('active');
+      overlay.classList.remove('active');
+    });
+    
+    // Close sidebar on window resize if screen becomes larger
+    window.addEventListener('resize', function() {
+      if (window.innerWidth > 768) {
         sidebar.classList.remove('active');
         content.classList.remove('active');
         overlay.classList.remove('active');
-      });
-      
-      // Close sidebar on window resize if screen becomes larger
-      window.addEventListener('resize', function() {
-        if (window.innerWidth > 768) {
-          sidebar.classList.remove('active');
-          content.classList.remove('active');
-          overlay.classList.remove('active');
-        }
-      });
+      }
     });
-  
-  // Actualizar el año actual en la firma
-  document.addEventListener('DOMContentLoaded', function() {
+    
+    // Actualizar el año actual en la firma
     document.getElementById('current-year').textContent = new Date().getFullYear();
+    
+    // Imprimir guía
+    document.getElementById('printBtn').addEventListener('click', function() {
+      window.print();
+    });
   });
-
-  </script>
-
+</script>
 </body>
 </html>
