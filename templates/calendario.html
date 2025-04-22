@@ -46,53 +46,60 @@
     min-height: 100vh; /* Altura mínima para ocupar toda la pantalla */
   }
   
-  /* Encabezado con imágenes más separadas - CORREGIDO */
+  /* Encabezado con imágenes - SOLUCIÓN FINAL */
   .header {
-    height: 245px;
+    min-height: 245px !important;
+    height: 245px !important;
     border-bottom: 1px solid #dee2e6;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-    overflow: hidden;
-    background-color: #ffffff; /* Aseguramos que tenga fondo blanco */
+    display: flex !important; /* Forzamos display flex */
+    align-items: center !important;
+    justify-content: space-between !important;
+    padding: 0 20px !important;
+    overflow: visible !important; /* Cambiado a visible */
+    background-color: #ffffff;
+    position: relative !important; /* Añadimos posición relativa */
+    z-index: 100 !important; /* Aseguramos que esté por encima de otros elementos */
+    visibility: visible !important; /* Forzamos visibilidad */
+    opacity: 1 !important; /* Aseguramos que sea opaco */
   }
   
-  /* Contenedor del logo alineado a la izquierda - CORREGIDO */
+  /* Contenedor del logo alineado a la izquierda */
   .logo-container {
     width: 45%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    overflow: hidden;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    overflow: visible !important; /* Cambiado a visible */
     margin-left: 0;
-    height: 100%; /* Aseguramos que ocupe toda la altura del header */
+    height: 100% !important; /* Aseguramos que ocupe toda la altura del header */
   }
   
-  /* Contenedor de usuario alineado a la derecha - CORREGIDO */
+  /* Contenedor de usuario alineado a la derecha */
   .user-container {
     width: 45%;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    height: 100%; /* Aseguramos que ocupe toda la altura del header */
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    height: 100% !important; /* Aseguramos que ocupe toda la altura del header */
   }
   
-  /* Imágenes más grandes sin recortes - CORREGIDO */
+  /* Imágenes más grandes sin recortes */
   .logo-img {
     height: 250px;  /* Ajustamos la altura */
     width: 300px;   /* Ajustamos el ancho */
-    object-fit: contain; /* Asegura que la imagen no se recorte */
+    object-fit: contain !important; /* Asegura que la imagen no se recorte */
     transform-origin: left center;
     max-width: 100%; /* Evita que la imagen se salga del contenedor */
+    display: block !important; /* Forzamos display block */
   }
 
   .user-img {
     height: 250px;  /* Ajustamos la altura */
     width: 255px;   /* Ajustamos el ancho */
-    object-fit: contain; /* Asegura que la imagen no se recorte */
+    object-fit: contain !important; /* Asegura que la imagen no se recorte */
     transform-origin: right center;
     max-width: 100%; /* Evita que la imagen se salga del contenedor */
+    display: block !important; /* Forzamos display block */
   }
   
   .nav-link {
@@ -218,16 +225,17 @@
     }
     
     .header {
-      height: 150px;
+      height: 150px !important;
+      min-height: 150px !important;
     }
     
     .logo-container, .user-container {
-      height: 150px;
+      height: 150px !important;
     }
     
     .logo-img, .user-img {
-      height: 120px;
-      width: auto;
+      height: 120px !important;
+      width: auto !important;
     }
     
     /* Ajuste para el botón de menú en móvil */
@@ -525,7 +533,7 @@
 
 <!-- Page content -->
 <div id="content" class="content">
-  <!-- Header with images - CORREGIDO -->
+  <!-- Header con imágenes - SOLUCIÓN FINAL -->
   <header class="header">
     <!-- Logo container -->
     <div class="logo-container">
@@ -534,13 +542,13 @@
         <i class="bi bi-list"></i>
       </button>
       
-      <!-- Top-left image - CORREGIDO: Cambiamos la ruta de la imagen -->
+      <!-- Top-left image -->
       <img src="../static/ISI.png" alt="Logo" class="logo-img">
     </div>
     
     <!-- User image container -->
     <div class="user-container">
-      <!-- Top-right image - CORREGIDO: Cambiamos la ruta de la imagen -->
+      <!-- Top-right image -->
       <img src="../static/proyectos logo2.png" alt="Usuario" class="user-img">
     </div>
   </header>
@@ -1071,7 +1079,7 @@
             </div>
             <div class="epp-card-body">
               <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
-             <img src="../static/arnes.jpg"  class="epp-card-image" alt="Equipo para espacios confinados">
+              <img src="../static/arnes.jpg" alt="Arnés de seguridad" class="epp-card-image">
               <div class="epp-card-description">
                 <p>Para trabajos realizados a más de 1.8 metros de altura donde existe riesgo de caída.</p>
               </div>
@@ -1115,7 +1123,7 @@
             </div>
             <div class="epp-card-body">
               <!-- CORREGIDO: Cambiamos la ruta de la imagen -->
-              <img src="../static/arnes2.jpg" alt="Equipo para espacios confinados" class="epp-card-image">
+              <img src="../static/arnes2.jpg"  class="epp-card-image" alt="Equipo para espacios confinados">
               <div class="epp-card-description">
                 <p>Para trabajos en espacios con aberturas limitadas de entrada y salida, ventilación natural desfavorable y no diseñados para ocupación continua.</p>
               </div>
